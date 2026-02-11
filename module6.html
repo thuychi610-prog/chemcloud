@@ -2,34 +2,45 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Module 6 – Hướng nghiệp Hóa học</title>
+<title>Tư vấn hướng nghiệp Hóa học | ChemCloud</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body{margin:0;font-family:'Segoe UI',Arial;background:#d5f0ff;}
-header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
-h1{margin:0;color:#2563eb;}
-.container{padding:24px;max-width:1000px;margin:auto;}
-.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,0.1);}
-.btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#d5f0ff;color:#0f172a}
+header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+h1{margin:0;color:#2563eb}
+.container{padding:24px;max-width:1000px;margin:auto}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.1);margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.path{background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:12px;cursor:pointer;color:#1e40af;font-weight:700}
+.path:hover,.path.active{background:#2563eb;color:#fff}
+.result{margin-top:12px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:12px;line-height:1.5}
+.btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;cursor:pointer}
+.btn:hover{background:#1e40af}
 </style>
 </head>
 <body>
-
-<header>
-<h1>🎓 Tư vấn hướng nghiệp Hóa học</h1>
-</header>
-
+<header><h1>🎓 Tư vấn hướng nghiệp Hóa học</h1></header>
 <div class="container">
-<div class="card">
-<p>✔ Ngành Dược</p>
-<p>✔ Công nghệ thực phẩm</p>
-<p>✔ Kỹ thuật hóa học</p>
-<p>✔ Môi trường</p>
+  <div class="card">
+    <h3>Chọn nhóm nghề bạn quan tâm</h3>
+    <div class="grid" id="paths">
+      <button class="path" data-title="Dược học" data-content="Phù hợp nếu bạn thích sinh học - hóa dược. Lộ trình: Hóa 11-12 vững + luyện đề đánh giá năng lực.">💊 Dược học</button>
+      <button class="path" data-title="Công nghệ thực phẩm" data-content="Phù hợp nếu bạn thích ứng dụng hóa vào thực phẩm sạch. Nên học thêm vi sinh, công nghệ bảo quản.">🍎 Công nghệ thực phẩm</button>
+      <button class="path" data-title="Kỹ thuật hóa học" data-content="Phù hợp nếu bạn thích phản ứng, thiết bị và dây chuyền sản xuất. Cần nền tảng Toán - Lý - Hóa tốt.">🏭 Kỹ thuật hóa học</button>
+      <button class="path" data-title="Môi trường" data-content="Phù hợp nếu bạn quan tâm xử lý nước, khí thải, chất thải. Nên rèn kỹ năng phân tích số liệu và thực địa.">🌱 Môi trường</button>
+    </div>
+    <div id="career" class="result">Bấm vào một nhóm nghề để nhận lộ trình gợi ý.</div>
+  </div>
+  <a href="index.html" class="btn">⬅ Quay về trang chính</a>
 </div>
-
-<br>
-<a href="index.html" class="btn">⬅ Quay về trang chính</a>
-</div>
-
+<script>
+const btns=document.querySelectorAll('.path');
+const out=document.getElementById('career');
+btns.forEach(btn=>btn.addEventListener('click',()=>{
+  btns.forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  out.innerHTML=`<b>Ngành:</b> ${btn.dataset.title}<br><b>Gợi ý:</b> ${btn.dataset.content}`;
+}));
+</script>
 </body>
 </html>
