@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng nhập | ChemCloud</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: radial-gradient(circle at 20% 20%, #fde7ef 0%, #e7f2ff 55%, #d9f0ff 100%);
+      color: #0f172a;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      padding: 28px;
+      align-items: center;
+    }
+
+    .left-panel {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 999px;
+      border: 2px dashed rgba(37, 99, 235, 0.2);
+    }
+
+    .circle.big { width: 520px; height: 520px; }
+    .circle.mid { width: 360px; height: 360px; border-style: solid; border-color: rgba(30, 64, 175, 0.22); }
+
+    .logo-box {
+      z-index: 2;
+      width: 160px;
+      height: 160px;
+      border-radius: 26px;
+      background: #ffffff;
+      border: 1px solid #f9a8d4;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.14);
+    }
+
+    .logo-core {
+      width: 96px;
+      height: 96px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #0f766e, #67e8f9);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 38px;
+      font-weight: 800;
+    }
+
+    .chip {
+      position: absolute;
+      z-index: 3;
+      background: #ffffff;
+      border: 1px solid #93c5fd;
+      color: #0f766e;
+      border-radius: 16px;
+      padding: 12px 16px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+      font-weight: 700;
+    }
+    .chip.top { top: 40px; right: 65px; }
+    .chip.bottom { left: 35px; bottom: 35px; width: 180px; }
+
+    .chip small { display: block; font-weight: 500; color: #64748b; }
+
+    .login-card {
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid #fecdd3;
+      padding: 34px;
+      box-shadow: 0 24px 44px rgba(15, 23, 42, 0.18);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 42px;
+      color: #065f46;
+    }
+
+    .brand p {
+      margin: 6px 0 0;
+      color: #64748b;
+      font-size: 18px;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #0f766e;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      border: 2px solid #99f6e4;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus { border-color: #14b8a6; }
+
+    .password-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .toggle-btn {
+      border: none;
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 8px;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(90deg, #065f46, #3b82f6);
+      cursor: pointer;
+    }
+
+    .submit-btn:hover { opacity: 0.95; }
+
+    .hint {
+      margin-top: 14px;
+      color: #334155;
+      font-size: 15px;
+    }
+
+    .result {
+      margin-top: 12px;
+      min-height: 24px;
+      font-weight: 700;
+    }
+
+    .footer-link {
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .footer-link a {
+      color: #1d4ed8;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 980px) {
+      .wrap { grid-template-columns: 1fr; }
+      .left-panel { min-height: 320px; }
+      .circle.big { width: 360px; height: 360px; }
+      .circle.mid { width: 250px; height: 250px; }
+      .chip.top { right: 16px; top: 20px; }
+      .chip.bottom { left: 12px; bottom: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="left-panel" aria-hidden="true">
+      <div class="circle big"></div>
+      <div class="circle mid"></div>
+      <div class="logo-box"><div class="logo-core">CH</div></div>
+      <div class="chip top">🤖 AI Coach<small>Realtime feedback</small></div>
+      <div class="chip bottom">📈 Chem Score<small>8.6 / 10</small></div>
+    </section>
+
+    <section class="login-card">
+      <div class="brand">
+        <h1>CompeTech</h1>
+        <p>Chào mừng bạn trở lại! Vui lòng đăng nhập để tiếp tục.</p>
+      </div>
+
+      <form id="loginForm">
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="Nhập địa chỉ email của bạn" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Mật khẩu</label>
+          <div class="password-row">
+            <input id="password" type="password" placeholder="Nhập mật khẩu của bạn" required />
+            <button id="togglePassword" type="button" class="toggle-btn">Hiện</button>
+          </div>
+        </div>
+
+        <button class="submit-btn" type="submit">Đăng nhập</button>
+        <div id="result" class="result"></div>
+      </form>
+
+      <p class="hint">Demo tài khoản: <b>teacher@chemcloud.vn</b> / <b>123456</b>.</p>
+      <div class="footer-link"><a href="index.html">⬅ Quay về trang chính</a></div>
+    </section>
+  </main>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const result = document.getElementById('result');
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+      const isHidden = passwordInput.type === 'password';
+      passwordInput.type = isHidden ? 'text' : 'password';
+      togglePassword.textContent = isHidden ? 'Ẩn' : 'Hiện';
+    });
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = passwordInput.value.trim();
+
+      if (email === 'teacher@chemcloud.vn' && password === '123456') {
+        localStorage.setItem('chemcloud_login', JSON.stringify({ email, role: 'teacher', at: Date.now() }));
+        result.style.color = '#166534';
+        result.textContent = '✅ Đăng nhập thành công! Đang chuyển về trang chủ...';
+        setTimeout(() => window.location.href = 'index.html', 900);
+      } else {
+        result.style.color = '#b91c1c';
+        result.textContent = '❌ Sai email hoặc mật khẩu. Vui lòng thử lại.';
+      }
+    });
+  </script>
+</body>
+</html>
