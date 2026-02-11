@@ -2,33 +2,57 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Game học tập</title>
+<title>Game học tập Hóa học | ChemCloud</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body{margin:0;font-family:'Segoe UI',Arial;background:#d5f0ff;}
-header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
-h1{margin:0;color:#2563eb;}
-.container{padding:24px;max-width:1000px;margin:auto;}
-.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,0.1);}
-.btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#d5f0ff;color:#0f172a}
+header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+h1{margin:0;color:#2563eb}
+.container{padding:24px;max-width:900px;margin:auto}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.1);margin-bottom:20px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:10px 12px;border-radius:10px;border:1px solid #cbd5e1;background:#f8fafc;cursor:pointer}
+.opt:hover{background:#eff6ff}
+#feedback{font-weight:700;margin-top:8px}
+.btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;cursor:pointer}
+.btn:hover{background:#1e40af}
 </style>
 </head>
 <body>
-
-<header>
-<h1>🎮 Game học tập Hóa học</h1>
-</header>
-
+<header><h1>🎮 Game học tập Hóa học</h1></header>
 <div class="container">
-<div class="card">
-<h3>Đố vui nhanh:</h3>
-<p>Nguyên tố nào có số hiệu nguyên tử 8?</p>
-<button class="btn" onclick="alert('Đáp án: Oxi')">Xem đáp án</button>
+  <div class="card">
+    <h3>Mini Game: Trả lời nhanh</h3>
+    <p id="q"></p>
+    <div id="opts"></div>
+    <p id="feedback"></p>
+    <p><b>Điểm:</b> <span id="score">0</span></p>
+    <button class="btn" onclick="nextQ()">Câu tiếp theo</button>
+  </div>
+  <a href="index.html" class="btn">⬅ Quay về</a>
 </div>
-
-<br>
-<a href="index.html" class="btn">⬅ Quay về</a>
-</div>
-
+<script>
+const bank=[
+ {q:'Nguyên tố có số hiệu nguyên tử 8 là?',a:['Oxi','Nito','Cacbon'],c:0},
+ {q:'Phản ứng trung hòa tạo ra gì?',a:['Muối + Nước','Khí + Muối','Kim loại + Khí'],c:0},
+ {q:'NaOH thuộc loại chất nào?',a:['Axit','Bazơ','Muối'],c:1},
+ {q:'Khí thoát ra khi Zn tác dụng HCl là?',a:['O2','H2','CO2'],c:1}
+];
+let score=0,idx=0;
+function render(){
+  const item=bank[idx%bank.length];
+  document.getElementById('q').textContent=item.q;
+  document.getElementById('feedback').textContent='';
+  document.getElementById('opts').innerHTML=item.a.map((x,i)=>`<button class="opt" onclick="check(${i})">${x}</button>`).join('');
+}
+function check(i){
+  const item=bank[idx%bank.length];
+  const ok=i===item.c;
+  if(ok) score++;
+  document.getElementById('score').textContent=score;
+  document.getElementById('feedback').textContent=ok?'✅ Chính xác!':'❌ Chưa đúng, thử câu tiếp theo nhé!';
+}
+function nextQ(){idx++;render();}
+render();
+</script>
 </body>
 </html>
