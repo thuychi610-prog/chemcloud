@@ -2,38 +2,67 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Module 3 – Hệ thống bài tập</title>
+<title>Hệ thống bài tập | ChemCloud</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body{margin:0;font-family:'Segoe UI',Arial;background:#d5f0ff;}
-header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
-h1{margin:0;color:#2563eb;}
-.container{padding:24px;max-width:900px;margin:auto;}
-.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,0.1);}
-.btn{margin-top:10px;display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#d5f0ff}
+header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+h1{margin:0;color:#2563eb}
+.container{padding:24px;max-width:900px;margin:auto}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.1)}
+.question{margin:14px 0;padding:12px;border-radius:12px;background:#f8fbff}
+label{display:block;margin:6px 0;cursor:pointer}
+.btn{margin-top:10px;display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;cursor:pointer}
+.btn:hover{background:#1e40af}
+#score{margin-top:10px;font-weight:700;color:#1e3a8a}
 </style>
 </head>
 <body>
-
-<header>
-<h1>📝 Hệ thống bài tập</h1>
-</header>
+<header><h1>📝 Hệ thống bài tập</h1></header>
 
 <div class="container">
-<div class="card">
-<h3>Câu hỏi mẫu:</h3>
-<p>Phản ứng este hóa xảy ra giữa:</p>
+  <div class="card">
+    <h3>Bài luyện tập nhanh (3 câu)</h3>
 
-<input type="radio"> A. Axit + Rượu<br>
-<input type="radio"> B. Muối + Axit<br>
-<input type="radio"> C. Kim loại + Axit<br>
+    <div class="question">
+      <b>Câu 1:</b> Phản ứng este hóa xảy ra giữa:
+      <label><input type="radio" name="q1" value="A"> A. Axit + Rượu</label>
+      <label><input type="radio" name="q1" value="B"> B. Muối + Axit</label>
+      <label><input type="radio" name="q1" value="C"> C. Kim loại + Axit</label>
+    </div>
 
-<button class="btn" onclick="alert('Đáp án đúng: A')">Nộp bài</button>
+    <div class="question">
+      <b>Câu 2:</b> Chất làm quỳ tím hóa xanh là:
+      <label><input type="radio" name="q2" value="A"> A. HCl</label>
+      <label><input type="radio" name="q2" value="B"> B. NaOH</label>
+      <label><input type="radio" name="q2" value="C"> C. CO₂</label>
+    </div>
+
+    <div class="question">
+      <b>Câu 3:</b> Kim loại phản ứng với dung dịch HCl tạo khí H₂ là:
+      <label><input type="radio" name="q3" value="A"> A. Cu</label>
+      <label><input type="radio" name="q3" value="B"> B. Ag</label>
+      <label><input type="radio" name="q3" value="C"> C. Zn</label>
+    </div>
+
+    <button class="btn" onclick="gradeQuiz()">Nộp bài</button>
+    <p id="score"></p>
+  </div>
+
+  <br>
+  <a href="index.html" class="btn">⬅ Quay về</a>
 </div>
 
-<br>
-<a href="index.html" class="btn">⬅ Quay về</a>
-</div>
-
+<script>
+function gradeQuiz() {
+  const answers = { q1: 'A', q2: 'B', q3: 'C' };
+  let score = 0;
+  Object.keys(answers).forEach((q) => {
+    const checked = document.querySelector(`input[name="${q}"]:checked`);
+    if (checked && checked.value === answers[q]) score += 1;
+  });
+  document.getElementById('score').textContent = `Kết quả: ${score}/3 câu đúng.`;
+}
+</script>
 </body>
 </html>
