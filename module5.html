@@ -2,34 +2,72 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Quản lý học tập</title>
+<title>Hệ thống quản lý học tập | ChemCloud</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body{margin:0;font-family:'Segoe UI',Arial;background:#d5f0ff;}
-header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
-h1{margin:0;color:#2563eb;}
-.container{padding:24px;max-width:1000px;margin:auto;}
-.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,0.1);}
-input{padding:10px;border-radius:10px;border:1px solid #ccc;width:100%;}
-.btn{margin-top:10px;display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#d5f0ff;color:#0f172a}
+header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+h1{margin:0;color:#2563eb}
+.container{padding:24px;max-width:1050px;margin:auto}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.1);margin-bottom:20px}
+.grid{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:10px}
+input,select{padding:10px;border-radius:10px;border:1px solid #cbd5e1;font-family:inherit}
+.table{width:100%;border-collapse:collapse;margin-top:12px}
+.table th,.table td{padding:10px;border-bottom:1px solid #e2e8f0;text-align:left}
+.pill{display:inline-block;padding:4px 10px;border-radius:999px;font-size:13px;font-weight:600}
+.good{background:#dcfce7;color:#166534}.mid{background:#fef9c3;color:#854d0e}.low{background:#fee2e2;color:#991b1b}
+.btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;cursor:pointer}
+.btn:hover{background:#1e40af}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+.stats div{background:#eff6ff;padding:10px 12px;border-radius:10px;font-weight:600;color:#1e40af}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.grid .btn{grid-column:1/-1}}
 </style>
 </head>
 <body>
-
-<header>
-<h1>📊 Hệ thống quản lý học sinh</h1>
-</header>
-
+<header><h1>📊 Hệ thống quản lý học tập</h1></header>
 <div class="container">
-<div class="card">
-<h3>Nhập tên học sinh:</h3>
-<input type="text" placeholder="Nguyễn Văn A">
-<button class="btn" onclick="alert('Đã lưu thông tin')">Lưu</button>
+  <div class="card">
+    <h3>Thêm học sinh</h3>
+    <div class="grid">
+      <input id="name" placeholder="Tên học sinh">
+      <input id="class" placeholder="Lớp (VD: 10A1)">
+      <select id="level">
+        <option value="good">Tốt</option>
+        <option value="mid">Đạt</option>
+        <option value="low">Cần hỗ trợ</option>
+      </select>
+      <button class="btn" onclick="addStudent()">Thêm</button>
+    </div>
+    <div class="stats" id="stats"></div>
+    <table class="table" id="table">
+      <thead><tr><th>Họ tên</th><th>Lớp</th><th>Mức độ</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <a href="index.html" class="btn">⬅ Quay về trang chính</a>
 </div>
-
-<br>
-<a href="index.html" class="btn">⬅ Quay về trang chính</a>
-</div>
-
+<script>
+const students=[];
+function levelLabel(level){return level==='good'?'Tốt':level==='mid'?'Đạt':'Cần hỗ trợ'}
+function render(){
+  const tbody=document.querySelector('#table tbody');
+  tbody.innerHTML=students.map(s=>`<tr><td>${s.name}</td><td>${s.className}</td><td><span class="pill ${s.level}">${levelLabel(s.level)}</span></td></tr>`).join('');
+  const good=students.filter(s=>s.level==='good').length;
+  const mid=students.filter(s=>s.level==='mid').length;
+  const low=students.filter(s=>s.level==='low').length;
+  document.getElementById('stats').innerHTML=`<div>Tổng: ${students.length}</div><div>Tốt: ${good}</div><div>Đạt: ${mid}</div><div>Cần hỗ trợ: ${low}</div>`;
+}
+function addStudent(){
+  const name=document.getElementById('name').value.trim();
+  const className=document.getElementById('class').value.trim();
+  const level=document.getElementById('level').value;
+  if(!name||!className){alert('Vui lòng nhập đủ tên và lớp');return;}
+  students.push({name,className,level});
+  document.getElementById('name').value='';
+  document.getElementById('class').value='';
+  render();
+}
+render();
+</script>
 </body>
 </html>
