@@ -9,59 +9,125 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: #d5f0ff; /* xanh dương nhạt */
+      background: linear-gradient(to bottom, #d5f0ff, #f0f9ff);
       color: #08090a;
     }
+
     header {
       background: #ffffff;
       padding: 16px 32px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
+
     header h1 {
       margin: 0;
       color: #2563eb;
     }
+
+    header p {
+      margin: 6px 0 0 0;
+      color: #555;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .hero h2 {
+      color: #1e3a8a;
+      font-size: 26px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 12px auto;
+      color: #333;
+    }
+
     nav {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
       padding: 32px;
     }
+
     .module-card {
       background: #ffffff;
       border-radius: 16px;
       padding: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+      transition: all 0.3s ease;
     }
+
     .module-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
     }
+
     .module-card h3 {
       margin-top: 0;
       color: #2563eb;
     }
+
     .btn {
       display: inline-block;
       margin-top: 12px;
       padding: 10px 16px;
-      background: #2563eb; /* xanh dương */
-      color: #f7e712; /*vàng*/
+      background: #2563eb;
+      color: #f7e712;
       border-radius: 999px;
       text-decoration: none;
       font-weight: 600;
+      transition: 0.3s;
     }
+
     .btn:hover {
-      opacity: 0.9;
+      background: #1e40af;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #ffffff;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
     }
   </style>
 </head>
+
 <body>
 
-<header>
+<header class="top-nav">
+  <div class="nav-left">
   <h1>🌥 ChemCloud</h1>
   <p>Hệ thống phát triển năng lực & phẩm chất học sinh THPT – Môn Hóa học</p>
+  <div class="nav-menu">
+    <a href="index.html">Trang chủ</a>
+    <a href="module1.html">Học liệu</a>
+    <a href="module3.html">Bài tập</a>
+    <a href="module4.html">STEAM</a>
+    <a href="module6.html">Hướng nghiệp</a>
+    <a href="module7.html">Game</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="#" class="login-btn">Đăng nhập</a>
+  </div>
 </header>
+
+<!-- PHẦN GIỚI THIỆU -->
+<section class="hero">
+  <h2>Chuyển đổi số trong dạy học Hóa học</h2>
+  <p>
+    ChemCloud tích hợp học liệu số, AI, mô phỏng thí nghiệm và STEAM nhằm phát triển 
+    năng lực tự học, tư duy phản biện và sáng tạo cho học sinh THPT theo CTGDPT 2018.
+  </p>
+</section>
 
 <nav>
   <div class="module-card">
@@ -112,6 +178,10 @@
     <a href="module8.html" class="btn">Gửi ý kiến</a>
   </div>
 </nav>
+
+<footer>
+  © 2026 ChemCloud | Thiết kế bởi Hùng Thúy Chi | Chuyển đổi số giáo dục Hóa học
+</footer>
 
 </body>
 </html>
