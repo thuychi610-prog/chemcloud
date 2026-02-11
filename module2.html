@@ -2,36 +2,52 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Phòng thí nghiệm vui</title>
+<title>Phòng thí nghiệm vui | ChemCloud</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body{margin:0;font-family:'Segoe UI',Arial;background:#d5f0ff;}
-header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
-h1{margin:0;color:#2563eb;}
-.container{padding:24px;max-width:1000px;margin:auto;}
-.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,0.1);margin-bottom:24px;}
-.btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#d5f0ff;color:#0f172a}
+header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+h1{margin:0;color:#2563eb}
+.container{padding:24px;max-width:1000px;margin:auto}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.1);margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.exp-btn{border:1px solid #bfdbfe;background:#eff6ff;border-radius:12px;padding:12px;cursor:pointer;text-align:left;font-weight:600;color:#1e40af}
+.exp-btn.active{background:#2563eb;color:#fff;border-color:#2563eb}
+.result{background:#f8fafc;border-radius:12px;padding:14px;border:1px dashed #cbd5e1;margin-top:12px}
+.btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;cursor:pointer}
+.btn:hover{background:#1e40af}
 </style>
 </head>
 <body>
-
 <header>
 <h1>🧪 Phòng thí nghiệm vui</h1>
 <p>Mô phỏng thí nghiệm Hóa học trực tuyến</p>
 </header>
 
 <div class="container">
-<div class="card">
-<h2>Thí nghiệm mô phỏng</h2>
-<p>✔ Phản ứng trao đổi ion</p>
-<p>✔ Phản ứng oxi hóa – khử</p>
-<p>✔ Chuẩn độ axit – bazơ</p>
+  <div class="card">
+    <h2>Chọn thí nghiệm mô phỏng</h2>
+    <div class="grid" id="exp-list">
+      <button class="exp-btn" data-name="Trao đổi ion" data-eq="AgNO₃ + NaCl → AgCl↓ + NaNO₃" data-ob="Xuất hiện kết tủa trắng AgCl.">⚗️ Phản ứng trao đổi ion</button>
+      <button class="exp-btn" data-name="Oxi hóa - khử" data-eq="Zn + 2HCl → ZnCl₂ + H₂↑" data-ob="Xuất hiện bọt khí H₂, kẽm tan dần.">🔥 Oxi hóa – khử</button>
+      <button class="exp-btn" data-name="Chuẩn độ axit-bazơ" data-eq="HCl + NaOH → NaCl + H₂O" data-ob="Dung dịch đổi màu ở điểm tương đương.">🧫 Chuẩn độ axit – bazơ</button>
+    </div>
+    <div class="result" id="result">Hãy chọn một thí nghiệm để xem phương trình và hiện tượng.</div>
+  </div>
 
-<button class="btn" onclick="alert('Mô phỏng sẽ được tích hợp sau')">Thực hành</button>
+  <a href="index.html" class="btn">⬅ Quay về trang chính</a>
 </div>
 
-<a href="index.html" class="btn">⬅ Quay về trang chính</a>
-</div>
-
+<script>
+const buttons = document.querySelectorAll('.exp-btn');
+const result = document.getElementById('result');
+buttons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    buttons.forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    result.innerHTML = `<b>Thí nghiệm:</b> ${btn.dataset.name}<br><b>PT phản ứng:</b> ${btn.dataset.eq}<br><b>Hiện tượng:</b> ${btn.dataset.ob}`;
+  });
+});
+</script>
 </body>
 </html>
