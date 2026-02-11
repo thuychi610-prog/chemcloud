@@ -2,34 +2,60 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Hòm thư góp ý</title>
+<title>Tiếng Anh chuyên ngành Hóa học | ChemCloud</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body{margin:0;font-family:'Segoe UI',Arial;background:#d5f0ff;}
-header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
-h1{margin:0;color:#2563eb;}
-.container{padding:24px;max-width:1000px;margin:auto;}
-.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,0.1);}
-textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;}
-.btn{margin-top:12px;display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#eef6ff;color:#0f172a}
+.container{max-width:1250px;margin:0 auto;padding:14px}
+.hero{background:linear-gradient(135deg,#10b8d9 0%, #2563eb 100%);border-radius:24px;padding:46px;color:#e6f8ff;display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.badge{display:inline-block;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.22);font-weight:700}
+h1{font-size:52px;line-height:1.05;margin:18px 0;color:#041b47}
+.hero p{font-size:36px;max-width:760px;font-weight:600;margin:0}
+.cta{background:#fff;color:#2563eb;text-decoration:none;font-weight:700;padding:22px 36px;border-radius:14px;display:inline-block;white-space:nowrap;font-size:30px}
+.section{background:#fff;border-radius:16px;padding:18px;margin-top:18px;box-shadow:0 8px 18px rgba(0,0,0,.08)}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.item{border:1px solid #bfdbfe;border-radius:12px;padding:12px;background:#eff6ff}
+.item b{display:block;color:#1e40af}
+.btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;cursor:pointer;margin-top:12px}
+.btn:hover{background:#1e40af}
+textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #cbd5e1;min-height:90px}
+@media(max-width:900px){h1{font-size:36px}.hero p{font-size:24px}.cta{font-size:22px;padding:16px 24px}}
 </style>
 </head>
 <body>
-
-<header>
-<h1>📮 Hòm thư góp ý</h1>
-</header>
-
 <div class="container">
-<div class="card">
-<textarea rows="5" placeholder="Nhập ý kiến của bạn..."></textarea>
-<br>
-<button class="btn" onclick="alert('Cảm ơn bạn đã góp ý!')">Gửi</button>
-</div>
+  <section class="hero">
+    <div>
+      <span class="badge">🌐 Song ngữ Anh - Việt</span>
+      <h1>Tiếng Anh chuyên ngành Hóa học</h1>
+      <p>Học từ vựng và thuật ngữ Hóa học với hỗ trợ phát âm chuẩn từ AI. Nâng cao khả năng đọc hiểu tài liệu khoa học quốc tế.</p>
+    </div>
+    <a href="#vocab" class="cta">Khám phá ngay →</a>
+  </section>
 
-<br>
-<a href="index.html" class="btn">⬅ Quay về</a>
-</div>
+  <section id="vocab" class="section">
+    <h3>📚 Bộ từ vựng Hóa học mẫu</h3>
+    <div class="row">
+      <div class="item"><b>Covalent bond</b>Liên kết cộng hóa trị</div>
+      <div class="item"><b>Ionic bond</b>Liên kết ion</div>
+      <div class="item"><b>Oxidation</b>Sự oxi hóa</div>
+      <div class="item"><b>Catalyst</b>Chất xúc tác</div>
+    </div>
+    <button class="btn" onclick="speakWord('Catalyst')">🔊 Nghe phát âm mẫu</button>
+  </section>
 
+  <a href="index.html" class="btn">⬅ Quay về trang chính</a>
+</div>
+<script>
+function speakWord(word){
+  const u=new SpeechSynthesisUtterance(word);
+  u.lang='en-US';
+  window.speechSynthesis.speak(u);
+}
+function sendMsg(){
+  const text=document.getElementById('msg').value.trim();
+  document.getElementById('done').textContent=text?'✅ Đã nhận tâm sự của bạn, cảm ơn bạn đã chia sẻ!':'⚠️ Vui lòng nhập nội dung trước khi gửi.';
+}
+</script>
 </body>
 </html>
