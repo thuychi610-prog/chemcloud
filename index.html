@@ -30,6 +30,75 @@
       color: #555;
     }
 
+    .top-nav {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      column-gap: 24px;
+      row-gap: 10px;
+    }
+
+    .header-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .header-brand p {
+      margin: 0;
+    }
+
+    .nav-menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .nav-menu a {
+      color: #1e40af;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+
+    .nav-menu a:hover {
+      background: #eef4ff;
+    }
+
+    .nav-right {
+      justify-self: end;
+    }
+
+    .login-btn {
+      color: #1e40af;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-btn:hover {
+      text-decoration: underline;
+    }
+
+
+    @media (max-width: 980px) {
+      .top-nav {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .nav-menu {
+        justify-content: flex-start;
+      }
+
+      .nav-right {
+        justify-self: start;
+      }
+    }
+
     /* ===== HERO SECTION ===== */
     .hero {
       text-align: center;
@@ -72,7 +141,9 @@
       color: #2563eb;
     }
 
-    .btn {
+    .btn,
+    .btn:link,
+    .btn:visited {
       display: inline-block;
       margin-top: 12px;
       padding: 10px 16px;
@@ -81,10 +152,25 @@
       border-radius: 999px;
       text-decoration: none;
       font-weight: 600;
-      transition: 0.3s;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .btn:hover {
+      background: #1e40af;
+      transform: translateY(-1px);
+    }
+
+    .login-btn {
+      display: inline-block;
+      padding: 10px 16px;
+      background: #2563eb;
+      color: #ffffff;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .login-btn:hover {
       background: #1e40af;
     }
 
@@ -104,9 +190,11 @@
 <body>
 
 <header class="top-nav">
-  <div class="nav-left">
-  <h1>🌥 ChemCloud</h1>
-  <p>Hệ thống phát triển năng lực & phẩm chất học sinh THPT – Môn Hóa học</p>
+  <div class="header-brand">
+    <h1>🌥 ChemCloud</h1>
+    <p>Hệ thống phát triển năng lực & phẩm chất học sinh THPT – Môn Hóa học</p>
+  </div>
+
   <div class="nav-menu">
     <a href="index.html">Trang chủ</a>
     <a href="module1.html">Học liệu</a>
@@ -186,4 +274,3 @@
 
 </body>
 </html>
-
