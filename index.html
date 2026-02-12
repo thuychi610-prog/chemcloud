@@ -53,20 +53,77 @@
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      gap: 14px;
+      gap: 10px;
+      position: relative;
     }
 
-    .nav-menu a {
+    .menu-item {
+      position: relative;
+    }
+
+    .menu-trigger {
       color: #1e40af;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       padding: 8px 12px;
       border-radius: 10px;
-      transition: background 0.2s;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 16px;
     }
 
-    .nav-menu a:hover {
+    .menu-trigger:hover,
+    .menu-item.open > .menu-trigger {
       background: #eef4ff;
+    }
+
+    .submenu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 360px;
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+      border-radius: 14px;
+      box-shadow: 0 16px 28px rgba(0,0,0,0.12);
+      padding: 14px;
+      display: none;
+      z-index: 50;
+    }
+
+    .menu-item.open .submenu {
+      display: block;
+    }
+
+    .submenu h4 {
+      margin: 0 0 10px;
+      color: #0f766e;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .submenu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .submenu a {
+      display: block;
+      text-decoration: none;
+      background: #f8fbff;
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+      padding: 10px;
+      color: #1e3a8a;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .submenu a:hover {
+      background: #eff6ff;
     }
 
     .nav-right {
@@ -98,6 +155,12 @@
 
       .nav-menu {
         justify-content: flex-start;
+      }
+
+      .submenu {
+        position: static;
+        min-width: auto;
+        margin-top: 6px;
       }
 
       .nav-right {
@@ -208,13 +271,73 @@
     <p>Hệ thống phát triển năng lực & phẩm chất học sinh THPT – Môn Hóa học</p>
   </div>
 
-  <div class="nav-menu">
-    <a href="index.html">Trang chủ</a>
-    <a href="module1.html">Học liệu</a>
-    <a href="module3.html">Bài tập</a>
-    <a href="module4.html">STEAM</a>
-    <a href="module6.html">Hướng nghiệp</a>
-    <a href="module7.html">Game</a>
+  <div class="nav-menu" id="mainMenu">
+    <a class="menu-trigger" href="index.html">Trang chủ</a>
+
+    <div class="menu-item">
+      <button class="menu-trigger" type="button">Học liệu</button>
+      <div class="submenu">
+        <h4>Kho học liệu</h4>
+        <div class="submenu-grid">
+          <a href="module1.html">SGK & tài liệu PDF</a>
+          <a href="module1.html">Video bài giảng</a>
+          <a href="module1.html">Ebook luyện thi</a>
+          <a href="module1.html">Chatbox AI Gia sư</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button class="menu-trigger" type="button">Bài tập</button>
+      <div class="submenu">
+        <h4>Luyện tập</h4>
+        <div class="submenu-grid">
+          <a href="module3.html">Trắc nghiệm nhanh</a>
+          <a href="module3.html">Bài tập tự luận</a>
+          <a href="module3.html">Chấm điểm tự động</a>
+          <a href="module3.html">Ôn tập theo chủ đề</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button class="menu-trigger" type="button">STEAM</button>
+      <div class="submenu">
+        <h4>Sáng tạo dự án</h4>
+        <div class="submenu-grid">
+          <a href="module4.html">Gợi ý ý tưởng</a>
+          <a href="module4.html">Khung dự án mẫu</a>
+          <a href="module4.html">Báo cáo sản phẩm</a>
+          <a href="module4.html">Đánh giá tiêu chí</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button class="menu-trigger" type="button">Hướng nghiệp</button>
+      <div class="submenu">
+        <h4>Định hướng nghề nghiệp</h4>
+        <div class="submenu-grid">
+          <a href="module6.html">Nhóm ngành Dược</a>
+          <a href="module6.html">Công nghệ thực phẩm</a>
+          <a href="module6.html">Kỹ thuật hóa học</a>
+          <a href="module6.html">Môi trường</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <button class="menu-trigger" type="button">Game</button>
+      <div class="submenu">
+        <h4>Học mà chơi</h4>
+        <div class="submenu-grid">
+          <a href="module7.html">Mini quiz</a>
+          <a href="module7.html">Tăng điểm theo câu</a>
+          <a href="module7.html">Làm lại ngẫu nhiên</a>
+          <a href="module7.html">Ôn tập vui</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="nav-right">
@@ -284,6 +407,27 @@
 <footer>
   © 2026 ChemCloud | Thiết kế bởi Hùng Thúy Chi | Chuyển đổi số giáo dục Hóa học
 </footer>
+
+
+<script>
+  const menuItems = document.querySelectorAll('.menu-item');
+
+  menuItems.forEach((item) => {
+    const trigger = item.querySelector('.menu-trigger');
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = item.classList.contains('open');
+      menuItems.forEach((m) => m.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#mainMenu')) {
+      menuItems.forEach((m) => m.classList.remove('open'));
+    }
+  });
+</script>
 
 </body>
 </html>
