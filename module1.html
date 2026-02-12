@@ -54,6 +54,55 @@
       opacity: 0.9;
     }
 
+    .resource-hint {
+      margin-top: 8px;
+      margin-bottom: 16px;
+      color: #1e40af;
+      font-weight: 600;
+    }
+
+    .resource-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .resource-list li {
+      margin-bottom: 12px;
+    }
+
+    .resource-link {
+      color: #1d4ed8;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 700;
+    }
+
+    .resource-link:hover {
+      color: #1e3a8a;
+    }
+
+    .resource-note {
+      color: #4b5563;
+      font-size: 14px;
+      margin-left: 6px;
+    }
+
+    .ai-response {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    .ai-note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #475569;
+    }
+
     input, textarea {
       width: 100%;
       padding: 12px;
@@ -76,11 +125,12 @@
   <!-- KHO HỌC LIỆU -->
   <div class="card">
     <h2>📘 Kho học liệu</h2>
-    <ul>
-      <li>✔ SGK Hóa học 10 – 11 – 12 (PDF)</li>
-      <li>✔ Video bài giảng minh họa</li>
-      <li>✔ Ebook – tài liệu luyện thi</li>
-      <li>✔ Ngân hàng kiến thức theo chủ đề</li>
+    <p class="resource-hint">👉 Bấm trực tiếp vào tên mục bên dưới để mở tài liệu.</p>
+    <ul class="resource-list">
+      <li>🔗 <a class="resource-link" href="https://sachmem.vn/books?grade=10&subject=chemistry" target="_blank" rel="noopener noreferrer">SGK Hóa học 10 – 11 – 12 (PDF)</a><span class="resource-note">(Mở nguồn SGK số)</span></li>
+      <li>🔗 <a class="resource-link" href="https://www.youtube.com/results?search_query=b%C3%A0i+gi%E1%BA%A3ng+h%C3%B3a+h%E1%BB%8Dc+THPT" target="_blank" rel="noopener noreferrer">Video bài giảng minh họa</a><span class="resource-note">(Kênh YouTube học tập)</span></li>
+      <li>🔗 <a class="resource-link" href="https://drive.google.com/drive/folders/PUT_YOUR_EBOOK_FOLDER_ID_HERE" target="_blank" rel="noopener noreferrer">Ebook – tài liệu luyện thi</a><span class="resource-note">(Thay bằng link Google Drive của bạn)</span></li>
+      <li>🔗 <a class="resource-link" href="https://docs.google.com/spreadsheets/d/PUT_YOUR_KNOWLEDGE_BANK_ID_HERE" target="_blank" rel="noopener noreferrer">Ngân hàng kiến thức theo chủ đề</a><span class="resource-note">(Thay bằng kho dữ liệu bạn quản lý)</span></li>
     </ul>
   </div>
 
@@ -89,18 +139,91 @@
     <h2>🤖 Chatbox AI Gia sư Hóa học</h2>
     <p>Nhập câu hỏi để được AI hỗ trợ:</p>
 
-    <textarea placeholder="Ví dụ: Giải thích phản ứng este hóa..."></textarea>
+    <textarea id="userQuestion" placeholder="Ví dụ: Giải thích phản ứng este hóa..."></textarea>
 
-    <button class="btn" style="margin-top:12px;">Hỏi AI</button>
+    <button id="askBtn" class="btn" style="margin-top:12px;">Hỏi AI</button>
 
-    <p style="margin-top:12px; font-style:italic; color:#555;">
-      (Bản demo – sẽ tích hợp AI thật ở bước sau)
-    </p>
+    <div id="aiResponse" class="ai-response">🤖 Trả lời sẽ hiển thị ở đây...</div>
+    <p class="ai-note">Nếu chat không phản hồi, kiểm tra lại model/API key trên server hoặc proxy backend.</p>
   </div>
 
   <a href="index.html" class="btn">⬅ Quay về trang chính</a>
 
 </div>
+
+
+<script>
+const GEMINI_API_KEY = "PASTE_YOUR_GEMINI_API_KEY_HERE";
+const GEMINI_MODEL = "gemini-1.5-flash-latest";
+
+const askBtn = document.getElementById("askBtn");
+const userQuestion = document.getElementById("userQuestion");
+const aiResponse = document.getElementById("aiResponse");
+
+async function askGemini() {
+  const question = userQuestion.value.trim();
+
+  if (!question) {
+    aiResponse.textContent = "⚠️ Vui lòng nhập câu hỏi trước khi gửi.";
+    return;
+  }
+
+  if (!GEMINI_API_KEY || GEMINI_API_KEY.includes("PASTE_YOUR")) {
+    aiResponse.textContent = "⚠️ Chưa cấu hình Gemini API key trong code (biến GEMINI_API_KEY).";
+    return;
+  }
+
+  askBtn.disabled = true;
+  askBtn.textContent = "Đang hỏi...";
+  aiResponse.textContent = "⏳ AI đang suy nghĩ...";
+
+  try {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+
+    const payload = {
+      contents: [
+        {
+          role: "user",
+          parts: [
+            {
+              text: `Bạn là gia sư Hóa học THPT. Trả lời ngắn gọn, dễ hiểu, có ví dụ nếu cần. Câu hỏi: ${question}`
+            }
+          ]
+        }
+      ]
+    };
+
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`Gemini API lỗi (${res.status}): ${errText}`);
+    }
+
+    const data = await res.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Không nhận được nội dung trả lời.";
+    aiResponse.textContent = `🤖 ${text}`;
+  } catch (error) {
+    aiResponse.textContent = `❌ Không gọi được Gemini: ${error.message}
+Gợi ý: kiểm tra key, hạn mức API, hoặc bật Generative Language API trong Google AI Studio.`;
+  } finally {
+    askBtn.disabled = false;
+    askBtn.textContent = "Hỏi AI";
+  }
+}
+
+askBtn.addEventListener("click", askGemini);
+userQuestion.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    askGemini();
+  }
+});
+</script>
 
 </body>
 </html>

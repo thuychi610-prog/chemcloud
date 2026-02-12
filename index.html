@@ -30,6 +30,92 @@
       color: #555;
     }
 
+    .top-nav {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      column-gap: 24px;
+      row-gap: 10px;
+    }
+
+    .header-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .header-brand p {
+      margin: 0;
+    }
+
+    .nav-menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .nav-menu a {
+      color: #1e40af;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+
+    .nav-menu a:hover {
+      background: #eef4ff;
+    }
+
+    .nav-right {
+      justify-self: end;
+    }
+
+    .login-btn {
+      color: #1e40af;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-btn:hover {
+      text-decoration: underline;
+    }
+
+
+    @media (max-width: 1280px) {
+      nav {
+        grid-template-columns: repeat(3, minmax(240px, 1fr));
+      }
+    }
+
+    @media (max-width: 980px) {
+      .top-nav {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .nav-menu {
+        justify-content: flex-start;
+      }
+
+      .nav-right {
+        justify-self: start;
+      }
+
+      nav {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+    }
+
     /* ===== HERO SECTION ===== */
     .hero {
       text-align: center;
@@ -49,9 +135,11 @@
 
     nav {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(4, minmax(260px, 1fr));
       gap: 20px;
       padding: 32px;
+      max-width: 1500px;
+      margin: 0 auto;
     }
 
     .module-card {
@@ -60,6 +148,9 @@
       padding: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 250px;
     }
 
     .module-card:hover {
@@ -72,20 +163,28 @@
       color: #2563eb;
     }
 
-    .btn {
+    .module-card p {
+      margin-bottom: 0;
+    }
+
+    .btn,
+    .btn:link,
+    .btn:visited {
       display: inline-block;
-      margin-top: 12px;
+      margin-top: auto;
+      align-self: flex-start;
       padding: 10px 16px;
       background: #2563eb;
       color: #f7e712;
       border-radius: 999px;
       text-decoration: none;
       font-weight: 600;
-      transition: 0.3s;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .btn:hover {
       background: #1e40af;
+      transform: translateY(-1px);
     }
 
     /* ===== FOOTER ===== */
@@ -104,9 +203,11 @@
 <body>
 
 <header class="top-nav">
-  <div class="nav-left">
-  <h1>🌥 ChemCloud</h1>
-  <p>Hệ thống phát triển năng lực & phẩm chất học sinh THPT – Môn Hóa học</p>
+  <div class="header-brand">
+    <h1>🌥 ChemCloud</h1>
+    <p>Hệ thống phát triển năng lực & phẩm chất học sinh THPT – Môn Hóa học</p>
+  </div>
+
   <div class="nav-menu">
     <a href="index.html">Trang chủ</a>
     <a href="module1.html">Học liệu</a>
@@ -117,7 +218,7 @@
   </div>
 
   <div class="nav-right">
-    <a href="#" class="login-btn">Đăng nhập</a>
+    <a href="login.html" class="login-btn">Đăng nhập</a>
   </div>
 </header>
 
@@ -174,9 +275,9 @@
   </div>
 
   <div class="module-card">
-    <h3>Hòm thư tâm sự</h3>
-    <p>Tiếp nhận ý kiến, phản hồi của học sinh.</p>
-    <a href="module8.html" class="btn">Gửi ý kiến</a>
+    <h3>Tiếng Anh chuyên ngành</h3>
+    <p>Song ngữ Anh - Việt, học thuật ngữ Hóa học và luyện phát âm nhanh.</p>
+    <a href="module8.html" class="btn">Khám phá ngay</a>
   </div>
 </nav>
 
