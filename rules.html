@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>Nội quy sử dụng ChemCloud</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(to bottom, #ecfeff, #e0f2fe);
+      color: #0f172a;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 14px 28px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand h1 {
+      margin: 0;
+      color: #1d4ed8;
+      font-size: 34px;
+    }
+
+    .brand p {
+      margin: 4px 0 0;
+      color: #64748b;
+      font-size: 15px;
+    }
+
+    .btn {
+      text-decoration: none;
+      background: #1d4ed8;
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 22px auto 0;
+      padding: 0 16px;
+    }
+
+    .hero-card {
+      background: linear-gradient(120deg, #0ea5e9, #1d4ed8);
+      color: #fff;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 18px 30px rgba(30, 64, 175, 0.25);
+    }
+
+    .hero-card h2 {
+      margin: 0;
+      font-size: 38px;
+    }
+
+    .hero-card p {
+      margin: 12px 0 0;
+      max-width: 760px;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 18px auto 36px;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .panel {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #bfdbfe;
+      padding: 18px;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      color: #1e40af;
+      font-size: 24px;
+    }
+
+    .rule-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .rule-list li {
+      background: #f8fbff;
+      border: 1px solid #dbeafe;
+      border-radius: 12px;
+      padding: 12px;
+      line-height: 1.5;
+    }
+
+    .rule-list b {
+      color: #0f766e;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    th, td {
+      border-bottom: 1px solid #dbeafe;
+      padding: 10px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background: #eff6ff;
+      color: #1e40af;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .ack {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .status {
+      margin-top: 10px;
+      font-weight: 700;
+      color: #0f766e;
+      min-height: 22px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 16px;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+      .hero-card h2 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top">
+      <div class="brand">
+        <h1>📘 ChemCloud Rules</h1>
+        <p>Nội quy sử dụng hệ thống học Hóa học trực tuyến</p>
+      </div>
+      <a href="index.html" class="btn">⬅ Về trang chủ</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card">
+      <h2>Nội quy học tập & ứng xử số</h2>
+      <p>
+        Bộ quy tắc này giúp học sinh sử dụng ChemCloud đúng mục đích, an toàn và hiệu quả.
+        Vui lòng đọc kỹ trước khi tham gia học liệu, chatbot AI và các hoạt động trên hệ thống.
+      </p>
+    </div>
+  </section>
+
+  <main>
+    <section class="panel">
+      <h3>1) Quy tắc chung</h3>
+      <ul class="rule-list">
+        <li><b>Đúng mục đích:</b> Chỉ dùng nền tảng để học tập môn Hóa học THPT.</li>
+        <li><b>Văn minh:</b> Không dùng từ ngữ xúc phạm, kích động hoặc phân biệt đối xử.</li>
+        <li><b>Trung thực:</b> Không sao chép bài làm của người khác để nộp như của mình.</li>
+        <li><b>Tuân thủ giáo viên:</b> Thực hiện đúng hướng dẫn trong từng bài/hoạt động.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h3>2) Quy tắc với Chatbot AI</h3>
+      <ul class="rule-list">
+        <li><b>Đặt câu hỏi rõ ràng:</b> Nêu cụ thể chương/chủ đề để AI hỗ trợ chính xác.</li>
+        <li><b>Không lạm dụng:</b> Không spam chatbot hoặc gửi nội dung không liên quan.</li>
+        <li><b>Không chia sẻ dữ liệu nhạy cảm:</b> Không nhập thông tin cá nhân quan trọng.</li>
+        <li><b>Kiểm chứng kết quả:</b> Đối chiếu đáp án AI với SGK, giáo viên và tài liệu chuẩn.</li>
+      </ul>
+    </section>
+
+    <section class="panel full">
+      <h3>3) Mức xử lý vi phạm</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Hành vi</th>
+            <th>Mức 1</th>
+            <th>Mức 2</th>
+            <th>Mức 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Spam / gửi nội dung không phù hợp</td>
+            <td>Nhắc nhở</td>
+            <td>Khóa tính năng 24h</td>
+            <td>Tạm khóa tài khoản</td>
+          </tr>
+          <tr>
+            <td>Gian lận học tập</td>
+            <td>Không tính điểm</td>
+            <td>Thông báo GVCN</td>
+            <td>Xử lý theo nội quy trường</td>
+          </tr>
+          <tr>
+            <td>Chia sẻ thông tin người khác</td>
+            <td>Gỡ nội dung</td>
+            <td>Cảnh cáo</td>
+            <td>Khóa tài khoản dài hạn</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel full">
+      <h3>4) Xác nhận đã đọc nội quy</h3>
+      <div class="ack">
+        <input id="agree" type="checkbox" />
+        <label for="agree">Tôi đã đọc, hiểu và cam kết tuân thủ nội quy sử dụng ChemCloud.</label>
+      </div>
+      <button id="confirmBtn" class="btn" style="margin-top:12px; border:none; cursor:pointer;">Xác nhận</button>
+      <div id="confirmStatus" class="status"></div>
+    </section>
+  </main>
+
+  <footer>© 2026 ChemCloud - Nội quy nền tảng học tập Hóa học</footer>
+
+  <script>
+    const agree = document.getElementById('agree');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const confirmStatus = document.getElementById('confirmStatus');
+
+    confirmBtn.addEventListener('click', () => {
+      if (!agree.checked) {
+        confirmStatus.style.color = '#b91c1c';
+        confirmStatus.textContent = '⚠️ Bạn cần tick vào ô cam kết trước khi xác nhận.';
+        return;
+      }
+      localStorage.setItem('chemcloud_rules_ack', JSON.stringify({ accepted: true, at: Date.now() }));
+      confirmStatus.style.color = '#0f766e';
+      confirmStatus.textContent = '✅ Đã xác nhận nội quy thành công.';
+    });
+  </script>
+
+  <script src="offline-register.js"></script>
+</body>
+</html>

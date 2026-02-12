@@ -41,7 +41,7 @@
     .btn {
       display: inline-block;
       padding: 10px 18px;
-      background: #2563eb;
+      background: #1c315f;
       color: #f7e712;
       border-radius: 999px;
       text-decoration: none;
@@ -87,6 +87,22 @@
       margin-left: 6px;
     }
 
+    .ai-response {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    .ai-note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #475569;
+    }
+
     input, textarea {
       width: 100%;
       padding: 12px;
@@ -123,15 +139,91 @@
     <h2>🤖 Chatbox AI Gia sư Hóa học</h2>
     <p>Nhập câu hỏi để được AI hỗ trợ:</p>
 
-    <textarea placeholder="Ví dụ: Giải thích phản ứng este hóa..."></textarea>
+    <textarea id="userQuestion" placeholder="Ví dụ: Giải thích phản ứng este hóa..."></textarea>
 
-    <button class="btn" style="margin-top:12px;">Hỏi AI</button>
+    <button id="askBtn" class="btn" style="margin-top:12px;">Hỏi AI</button>
 
-    <p style="margin-top:12px; font-style:italic; color:#555;">
-      (Bản demo – sẽ tích hợp AI thật ở bước sau)
-    </p>
+    <div id="aiResponse" class="ai-response">🤖 Trả lời sẽ hiển thị ở đây...</div>
+    <p class="ai-note">Nếu chat không phản hồi, kiểm tra lại model/API key trên server hoặc proxy backend.</p>
   </div>
+
   <a href="index.html" class="btn">⬅ Quay về trang chính</a>
+
 </div>
+
+
+<script>
+const GEMINI_API_KEY = "PASTE_YOUR_GEMINI_API_KEY_HERE";
+const GEMINI_MODEL = "gemini-1.5-flash-latest";
+
+const askBtn = document.getElementById("askBtn");
+const userQuestion = document.getElementById("userQuestion");
+const aiResponse = document.getElementById("aiResponse");
+
+async function askGemini() {
+  const question = userQuestion.value.trim();
+
+  if (!question) {
+    aiResponse.textContent = "⚠️ Vui lòng nhập câu hỏi trước khi gửi.";
+    return;
+  }
+
+  if (!GEMINI_API_KEY || GEMINI_API_KEY.includes("PASTE_YOUR")) {
+    aiResponse.textContent = "⚠️ Chưa cấu hình Gemini API key trong code (biến GEMINI_API_KEY).";
+    return;
+  }
+
+  askBtn.disabled = true;
+  askBtn.textContent = "Đang hỏi...";
+  aiResponse.textContent = "⏳ AI đang suy nghĩ...";
+
+  try {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${1234}`;
+
+    const payload = {
+      contents: [
+        {
+          role: "user",
+          parts: [
+            {
+              text: `Bạn là gia sư Hóa học THPT. Trả lời ngắn gọn, dễ hiểu, có ví dụ nếu cần. Câu hỏi: ${question}`
+            }
+          ]
+        }
+      ]
+    };
+
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`Gemini API lỗi (${res.status}): ${errText}`);
+    }
+
+    const data = await res.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Không nhận được nội dung trả lời.";
+    aiResponse.textContent = `🤖 ${text}`;
+  } catch (error) {
+    aiResponse.textContent = `❌ Không gọi được Gemini: ${error.message}
+Gợi ý: kiểm tra key, hạn mức API, hoặc bật Generative Language API trong Google AI Studio.`;
+  } finally {
+    askBtn.disabled = false;
+    askBtn.textContent = "Hỏi AI";
+  }
+}
+
+askBtn.addEventListener("click", askGemini);
+userQuestion.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    askGemini();
+  }
+});
+</script>
+
 </body>
 </html>

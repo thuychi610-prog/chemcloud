@@ -143,27 +143,42 @@
 
     .submit-btn:hover { opacity: 0.95; }
 
-    .divider {
-      margin: 14px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #64748b;
-      font-size: 13px;
+    .google-quick {
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid #dbeafe;
+      border-radius: 12px;
+      background: #f8fbff;
     }
 
-    .divider::before,
-    .divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: #cbd5e1;
+    .google-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .google-row b {
+      color: #1e40af;
     }
 
     #googleSignInBtn {
       display: flex;
       justify-content: center;
-      margin-bottom: 10px;
+      margin: 4px 0 0;
+      min-height: 44px;
+    }
+
+    .quick-google-btn {
+      width: 100%;
+      border: 1px solid #93c5fd;
+      background: #ffffff;
+      color: #1e3a8a;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .hint {
@@ -202,7 +217,7 @@
     <section class="left-panel" aria-hidden="true">
       <h2>🔐 Đăng nhập ChemCloud</h2>
       <p>Đồng bộ với giao diện hệ thống học Hóa học. Bạn có thể đăng nhập bằng tài khoản nội bộ hoặc Gmail.</p>
-      <div class="left-chip">💡 Sau khi đăng nhập thành công sẽ chuyển đến: <b>index.html</b></div>
+      <div class="left-chip">💡 Sau khi đăng nhập thành công sẽ chuyển đến: <b>Trang chủ</b></div>
       <div class="bubble one"></div>
       <div class="bubble two"></div>
     </section>
@@ -230,14 +245,16 @@
         <button class="submit-btn" type="submit">Đăng nhập</button>
       </form>
 
-      <div class="divider">hoặc đăng nhập bằng Gmail</div>
-      <div id="googleSignInBtn"></div>
+      <div id="googleQuickWrap" class="google-quick">
+        <div class="google-row">
+          <b>Đăng nhập nhanh với Gmail</b>
+          <button id="googleQuickBtn" type="button" class="quick-google-btn">Chọn tài khoản Google</button>
+        </div>
+        <div id="googleSignInBtn"></div>
+      </div>
 
       <div id="result" class="result"></div>
-      <p class="hint">
-        Demo tài khoản: <b>teacher@chemcloud.vn</b> / <b>123456</b>.<br>
-        Để bật Gmail Login, thay <code>GOOGLE_CLIENT_ID</code> bên dưới bằng client ID từ Google Cloud Console.
-      </p>
+      <p class="hint">Demo tài khoản: <b>teacher@chemcloud.vn</b> / <b>123456</b>.</p>
       <div class="footer-link"><a href="index.html">⬅ Quay về trang chính</a></div>
     </section>
   </main>
@@ -251,6 +268,9 @@
     const result = document.getElementById('result');
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
+        const googleSignInBtn = document.getElementById('googleSignInBtn');
+    const googleQuickWrap = document.getElementById('googleQuickWrap');
+    const googleQuickBtn = document.getElementById('googleQuickBtn');
 
     function saveLoginSession(payload) {
       localStorage.setItem('chemcloud_login', JSON.stringify({
@@ -316,21 +336,26 @@
       }
 
       if (GOOGLE_CLIENT_ID.includes('PASTE_GOOGLE_CLIENT_ID_HERE')) {
-        showResult('⚠️ Gmail Login chưa bật: cần thay GOOGLE_CLIENT_ID trong login.html.', false);
+        googleQuickWrap.style.display = 'none';
         return;
       }
 
       google.accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
-        callback: handleGoogleCredentialResponse
+        callback: handleGoogleCredentialResponse,
+        auto_select: false,
+        ux_mode: 'popup'
       });
 
       google.accounts.id.renderButton(document.getElementById('googleSignInBtn'), {
         theme: 'outline',
         size: 'large',
         width: 330,
-        text: 'continue_with'
+        text: 'signin_with'
       });
+
+      google.accounts.id.prompt();
+      googleQuickBtn.addEventListener('click', () => google.accounts.id.prompt());
     });
   </script>
 </body>
