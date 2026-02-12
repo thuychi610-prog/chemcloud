@@ -10,101 +10,85 @@
       margin: 0;
       min-height: 100vh;
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: radial-gradient(circle at 20% 20%, #fde7ef 0%, #e7f2ff 55%, #d9f0ff 100%);
+      background: linear-gradient(to bottom, #d5f0ff, #f0f9ff);
       color: #0f172a;
     }
 
     .wrap {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      padding: 28px;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+      padding: 26px;
       align-items: center;
     }
 
     .left-panel {
-      position: relative;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.1);
       min-height: 520px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .circle {
+    .left-panel h2 {
+      margin: 0;
+      color: #2563eb;
+      font-size: 34px;
+    }
+
+    .left-panel p {
+      color: #475569;
+      margin-top: 10px;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+
+    .bubble {
       position: absolute;
       border-radius: 999px;
-      border: 2px dashed rgba(37, 99, 235, 0.2);
+      border: 2px dashed rgba(37,99,235,0.25);
     }
+    .bubble.one { width: 280px; height: 280px; bottom: -40px; right: -30px; }
+    .bubble.two { width: 180px; height: 180px; top: 120px; left: -40px; }
 
-    .circle.big { width: 520px; height: 520px; }
-    .circle.mid { width: 360px; height: 360px; border-style: solid; border-color: rgba(30, 64, 175, 0.22); }
-
-    .logo-box {
-      z-index: 2;
-      width: 160px;
-      height: 160px;
-      border-radius: 26px;
-      background: #ffffff;
-      border: 1px solid #f9a8d4;
-      display: grid;
-      place-items: center;
-      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.14);
+    .left-chip {
+      margin-top: 18px;
+      background: #eff6ff;
+      color: #1e40af;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      width: fit-content;
     }
-
-    .logo-core {
-      width: 96px;
-      height: 96px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #0f766e, #67e8f9);
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-size: 38px;
-      font-weight: 800;
-    }
-
-    .chip {
-      position: absolute;
-      z-index: 3;
-      background: #ffffff;
-      border: 1px solid #93c5fd;
-      color: #0f766e;
-      border-radius: 16px;
-      padding: 12px 16px;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
-      font-weight: 700;
-    }
-    .chip.top { top: 40px; right: 65px; }
-    .chip.bottom { left: 35px; bottom: 35px; width: 180px; }
-
-    .chip small { display: block; font-weight: 500; color: #64748b; }
 
     .login-card {
-      background: #fff;
+      background: #ffffff;
       border-radius: 18px;
-      border: 1px solid #fecdd3;
-      padding: 34px;
-      box-shadow: 0 24px 44px rgba(15, 23, 42, 0.18);
+      border: 1px solid #bfdbfe;
+      padding: 28px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
     }
 
     .brand {
       text-align: center;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .brand h1 {
       margin: 0;
-      font-size: 42px;
-      color: #065f46;
+      font-size: 38px;
+      color: #1d4ed8;
     }
 
     .brand p {
-      margin: 6px 0 0;
+      margin: 8px 0 0;
       color: #64748b;
-      font-size: 18px;
+      font-size: 16px;
     }
 
     .field { margin-bottom: 14px; }
@@ -112,20 +96,20 @@
     label {
       display: block;
       margin-bottom: 6px;
-      color: #0f766e;
+      color: #1e3a8a;
       font-weight: 600;
     }
 
     input {
       width: 100%;
-      border: 2px solid #99f6e4;
+      border: 1px solid #93c5fd;
       border-radius: 10px;
       padding: 12px;
       font-size: 16px;
       outline: none;
     }
 
-    input:focus { border-color: #14b8a6; }
+    input:focus { border-color: #2563eb; }
 
     .password-row {
       display: grid;
@@ -150,29 +134,54 @@
       border: none;
       border-radius: 10px;
       padding: 12px;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
       color: #fff;
-      background: linear-gradient(90deg, #065f46, #3b82f6);
+      background: linear-gradient(90deg, #1e40af, #2563eb);
       cursor: pointer;
     }
 
     .submit-btn:hover { opacity: 0.95; }
 
+    .divider {
+      margin: 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #cbd5e1;
+    }
+
+    #googleSignInBtn {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
     .hint {
       margin-top: 14px;
       color: #334155;
-      font-size: 15px;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .result {
-      margin-top: 12px;
-      min-height: 24px;
+      margin-top: 10px;
+      min-height: 26px;
       font-weight: 700;
+      white-space: pre-wrap;
     }
 
     .footer-link {
-      margin-top: 12px;
+      margin-top: 14px;
       text-align: center;
     }
 
@@ -184,27 +193,23 @@
 
     @media (max-width: 980px) {
       .wrap { grid-template-columns: 1fr; }
-      .left-panel { min-height: 320px; }
-      .circle.big { width: 360px; height: 360px; }
-      .circle.mid { width: 250px; height: 250px; }
-      .chip.top { right: 16px; top: 20px; }
-      .chip.bottom { left: 12px; bottom: 18px; }
+      .left-panel { min-height: 260px; }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
     <section class="left-panel" aria-hidden="true">
-      <div class="circle big"></div>
-      <div class="circle mid"></div>
-      <div class="logo-box"><div class="logo-core">CH</div></div>
-      <div class="chip top">🤖 AI Coach<small>Realtime feedback</small></div>
-      <div class="chip bottom">📈 Chem Score<small>8.6 / 10</small></div>
+      <h2>🔐 Đăng nhập ChemCloud</h2>
+      <p>Đồng bộ với giao diện hệ thống học Hóa học. Bạn có thể đăng nhập bằng tài khoản nội bộ hoặc Gmail.</p>
+      <div class="left-chip">💡 Sau khi đăng nhập thành công sẽ chuyển đến: <b>index.html</b></div>
+      <div class="bubble one"></div>
+      <div class="bubble two"></div>
     </section>
 
     <section class="login-card">
       <div class="brand">
-        <h1>CompeTech</h1>
+        <h1>ChemCloud</h1>
         <p>Chào mừng bạn trở lại! Vui lòng đăng nhập để tiếp tục.</p>
       </div>
 
@@ -223,19 +228,45 @@
         </div>
 
         <button class="submit-btn" type="submit">Đăng nhập</button>
-        <div id="result" class="result"></div>
       </form>
 
-      <p class="hint">Demo tài khoản: <b>teacher@chemcloud.vn</b> / <b>123456</b>.</p>
+      <div class="divider">hoặc đăng nhập bằng Gmail</div>
+      <div id="googleSignInBtn"></div>
+
+      <div id="result" class="result"></div>
+      <p class="hint">
+        Demo tài khoản: <b>teacher@chemcloud.vn</b> / <b>123456</b>.<br>
+        Để bật Gmail Login, thay <code>GOOGLE_CLIENT_ID</code> bên dưới bằng client ID từ Google Cloud Console.
+      </p>
       <div class="footer-link"><a href="index.html">⬅ Quay về trang chính</a></div>
     </section>
   </main>
 
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script>
+    const LOGIN_SUCCESS_REDIRECT = 'index.html';
+    const GOOGLE_CLIENT_ID = 'PASTE_GOOGLE_CLIENT_ID_HERE.apps.googleusercontent.com';
+
     const loginForm = document.getElementById('loginForm');
     const result = document.getElementById('result');
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
+
+    function saveLoginSession(payload) {
+      localStorage.setItem('chemcloud_login', JSON.stringify({
+        ...payload,
+        at: Date.now()
+      }));
+    }
+
+    function showResult(message, ok = false) {
+      result.style.color = ok ? '#166534' : '#b91c1c';
+      result.textContent = message;
+    }
+
+    function redirectAfterLogin() {
+      setTimeout(() => window.location.href = LOGIN_SUCCESS_REDIRECT, 900);
+    }
 
     togglePassword.addEventListener('click', () => {
       const isHidden = passwordInput.type === 'password';
@@ -249,14 +280,57 @@
       const password = passwordInput.value.trim();
 
       if (email === 'teacher@chemcloud.vn' && password === '123456') {
-        localStorage.setItem('chemcloud_login', JSON.stringify({ email, role: 'teacher', at: Date.now() }));
-        result.style.color = '#166534';
-        result.textContent = '✅ Đăng nhập thành công! Đang chuyển về trang chủ...';
-        setTimeout(() => window.location.href = 'index.html', 900);
+        saveLoginSession({ email, role: 'teacher', provider: 'password' });
+        showResult('✅ Đăng nhập thành công! Đang chuyển trang...', true);
+        redirectAfterLogin();
       } else {
-        result.style.color = '#b91c1c';
-        result.textContent = '❌ Sai email hoặc mật khẩu. Vui lòng thử lại.';
+        showResult('❌ Sai email hoặc mật khẩu. Vui lòng thử lại.');
       }
+    });
+
+    function parseJwt(token) {
+      const base64 = token.split('.')[1];
+      const json = atob(base64.replace(/-/g, '+').replace(/_/g, '/'));
+      return JSON.parse(decodeURIComponent(Array.prototype.map.call(json, c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')));
+    }
+
+    function handleGoogleCredentialResponse(response) {
+      try {
+        const profile = parseJwt(response.credential);
+        saveLoginSession({
+          email: profile.email,
+          name: profile.name,
+          provider: 'google'
+        });
+        showResult(`✅ Đăng nhập Gmail thành công: ${profile.email}\nĐang chuyển trang...`, true);
+        redirectAfterLogin();
+      } catch (err) {
+        showResult('❌ Không xử lý được phản hồi Gmail Login.');
+      }
+    }
+
+    window.addEventListener('load', () => {
+      if (!window.google || !google.accounts || !google.accounts.id) {
+        showResult('⚠️ Không tải được Google Sign-In. Kiểm tra kết nối mạng.', false);
+        return;
+      }
+
+      if (GOOGLE_CLIENT_ID.includes('PASTE_GOOGLE_CLIENT_ID_HERE')) {
+        showResult('⚠️ Gmail Login chưa bật: cần thay GOOGLE_CLIENT_ID trong login.html.', false);
+        return;
+      }
+
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleGoogleCredentialResponse
+      });
+
+      google.accounts.id.renderButton(document.getElementById('googleSignInBtn'), {
+        theme: 'outline',
+        size: 'large',
+        width: 330,
+        text: 'continue_with'
+      });
     });
   </script>
 </body>
