@@ -133,6 +133,21 @@
       background: #eff6ff;
     }
 
+    /* Bổ sung: cưỡng bức ẩn dropdown khi chưa mở */
+    #mainMenu .menu-item:not(.open) > .submenu {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      transform: translateY(8px) !important;
+    }
+
+    #mainMenu .menu-item.open > .submenu {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      transform: translateY(0) !important;
+    }
+
     .nav-right {
       justify-self: end;
     }
@@ -412,6 +427,11 @@
 
 <script>
   const menuItems = document.querySelectorAll('.menu-item');
+
+  // Bổ sung: đảm bảo dropdown luôn đóng khi tải trang
+  window.addEventListener('DOMContentLoaded', () => {
+    menuItems.forEach((m) => m.classList.remove('open'));
+  });
 
   menuItems.forEach((item) => {
     const trigger = item.querySelector('.menu-trigger');
