@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Phòng thí nghiệm vui | ChemCloud</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <style>
 body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#d5f0ff;color:#0f172a}
 header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
@@ -16,8 +16,10 @@ h1{margin:0;color:#2563eb}
 .result{background:#f8fafc;border-radius:12px;padding:14px;border:1px dashed #cbd5e1;margin-top:12px}
 .btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;cursor:pointer}
 .btn:hover{background:#1e40af}
-.lab-frame{width:100%;max-width:1000px;height:800px;border:none;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.lab-frame{width:100%;max-width:1000px;aspect-ratio:4/3;height:auto;min-height:600px;border:none;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+@media(max-width:640px){header{padding:14px 16px}.container{padding:16px}.grid{grid-template-columns:1fr}.lab-frame{min-height:220px}}
 </style>
+
 </head>
 <body>
 <header>
