@@ -16,6 +16,7 @@ h1{margin:0;color:#2563eb}
 .result{background:#f8fafc;border-radius:12px;padding:14px;border:1px dashed #cbd5e1;margin-top:12px}
 .btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;cursor:pointer}
 .btn:hover{background:#1e40af}
+.lab-frame{width:100%;max-width:1000px;height:800px;border:none;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 </style>
 </head>
 <body>
@@ -25,8 +26,8 @@ h1{margin:0;color:#2563eb}
 </header>
 
 <div class="container">
-  <div class="card">
-    <h2>Chọn thí nghiệm mô phỏng</h2>
+  <div class="card">␊
+    <h2>Chọn thí nghiệm mô phỏng</h2>␊
     <div class="grid" id="exp-list">
       <button class="exp-btn" data-name="Phản ứng trao đổi ion" data-eq="AgNO₃ + NaCl → AgCl↓ + NaNO₃" data-ob="Xuất hiện kết tủa trắng AgCl.">⚗️ Phản ứng trao đổi ion</button>
       <button class="exp-btn" data-name="Mô hình nguyên tử" data-eq=""data-ob=""></button>
@@ -47,6 +48,31 @@ h1{margin:0;color:#2563eb}
     <div class="result" id="result">Hãy chọn một thí nghiệm để xem phương trình và hiện tượng.</div>
   </div>
 
+  <div class="card">
+    <h2>Thí nghiệm Đồng vị và nguyên tử khối</h2>
+    <p>Khám phá các đồng vị và cách tính nguyên tử khối trung bình ngay trong mô phỏng PhET.</p>
+    <iframe
+      class="lab-frame"
+      src="https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_vi.html"
+      width="1000"
+      height="800"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+   <div class="card">
+    <h2>Năng lượng: các dạng và sự chuyển hoá</h2>
+    <p>Khám phá sự bảo toàn, chuyển hóa, truyền năng lượng trong mô phỏng PhET.</p>
+    <iframe
+      class="lab-frame"
+      src="https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_vi.html"
+      width="1000"
+      height="800"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  
   <a href="index.html" class="btn">⬅ Quay về trang chính</a>
 </div>
 
