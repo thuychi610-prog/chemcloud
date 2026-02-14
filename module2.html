@@ -25,6 +25,12 @@ h1{margin:0;color:#2563eb}
 .drop-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .pill{background:#1d4ed8;color:#fff;padding:5px 10px;border-radius:999px;font-size:13px}
 .note{margin-top:10px;color:#475569;font-size:14px}
+
+.quick-tools{background:#cfe8f6;border:1px solid #a9cfe6;border-radius:12px;padding:10px 12px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.tool-link,.tool-link:visited{color:#1e40af;text-decoration:none;font-weight:700;padding:6px 10px;border-radius:8px;background:#f8fbff;border:1px solid #bfdbfe}
+.tool-link:hover{background:#eaf4ff;color:#1d4ed8}
+.back-inline{margin-left:auto}
+@media(max-width:760px){.back-inline{margin-left:0;width:100%;text-align:center}}
 </style>
 </head>
 <body>
@@ -34,6 +40,13 @@ h1{margin:0;color:#2563eb}
 </header>
 
 <div class="container">
+
+  <div class="quick-tools" aria-label="Liên kết nhanh module lab">
+    <a class="tool-link" href="#smartlab-real">✅ SmartLab thật sự (kéo-thả hóa chất)</a>
+    <a class="tool-link" href="molecule3d.html">✅ Phân tử ball-stick 3D</a>
+    <a href="index.html" class="btn back-inline">⬅ Quay về trang chính</a>
+  </div>
+
   <div class="card">
     <h2>Chọn thí nghiệm mô phỏng</h2>
     <div class="grid" id="exp-list">
@@ -63,7 +76,6 @@ h1{margin:0;color:#2563eb}
     <button id="resetBtn" class="btn" style="margin-top:8px">Làm lại SmartLab</button>
   </div>
 
-  <a href="index.html" class="btn">⬅ Quay về trang chính</a>
 </div>
 
 <script>
