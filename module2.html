@@ -4,18 +4,27 @@
 <meta charset="UTF-8">
 <title>Phòng thí nghiệm vui | ChemCloud</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.webmanifest" />
 <style>
 body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#d5f0ff;color:#0f172a}
 header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
 h1{margin:0;color:#2563eb}
 .container{padding:24px;max-width:1000px;margin:auto}
-.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.1);margin-bottom:20px}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.1);margin-bottom:20px;border:1px solid #bfdbfe}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .exp-btn{border:1px solid #bfdbfe;background:#eff6ff;border-radius:12px;padding:12px;cursor:pointer;text-align:left;font-weight:600;color:#1e40af}
 .exp-btn.active{background:#2563eb;color:#fff;border-color:#2563eb}
 .result{background:#f8fafc;border-radius:12px;padding:14px;border:1px dashed #cbd5e1;margin-top:12px}
 .btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;cursor:pointer}
 .btn:hover{background:#1e40af}
+
+.feature-pill{display:inline-block;background:#f8fafc;border:1px solid #bfdbfe;border-radius:12px;padding:10px 14px;font-weight:700;color:#1e293b;margin-bottom:12px}
+.chem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.chem{padding:10px;border:1px solid #dbeafe;border-radius:10px;background:#f8fbff;cursor:grab;font-weight:600;text-align:center}
+.dropzone{min-height:130px;border:2px dashed #60a5fa;border-radius:14px;background:#eff6ff;padding:12px}
+.drop-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pill{background:#1d4ed8;color:#fff;padding:5px 10px;border-radius:999px;font-size:13px}
+.note{margin-top:10px;color:#475569;font-size:14px}
 </style>
 </head>
 <body>
@@ -35,6 +44,25 @@ h1{margin:0;color:#2563eb}
     <div class="result" id="result">Hãy chọn một thí nghiệm để xem phương trình và hiện tượng.</div>
   </div>
 
+  <div class="card" id="smartlab-real">
+    <div class="feature-pill">✅ SmartLab thật sự (kéo-thả hóa chất)</div>
+    <div class="chem-grid">
+      <div class="chem" draggable="true" data-chem="HCl">HCl</div>
+      <div class="chem" draggable="true" data-chem="NaOH">NaOH</div>
+      <div class="chem" draggable="true" data-chem="AgNO3">AgNO₃</div>
+      <div class="chem" draggable="true" data-chem="NaCl">NaCl</div>
+      <div class="chem" draggable="true" data-chem="CuSO4">CuSO₄</div>
+      <div class="chem" draggable="true" data-chem="Fe">Fe</div>
+    </div>
+    <div id="beaker" class="dropzone" style="margin-top:12px">
+      Thả hóa chất vào đây...
+      <div id="dropList" class="drop-list"></div>
+    </div>
+    <div id="smartResult" class="result">Kết quả SmartLab sẽ hiển thị tại đây.</div>
+    <p class="note">Mẹo: thử HCl + NaOH hoặc AgNO₃ + NaCl.</p>
+    <button id="resetBtn" class="btn" style="margin-top:8px">Làm lại SmartLab</button>
+  </div>
+
   <a href="index.html" class="btn">⬅ Quay về trang chính</a>
 </div>
 
@@ -48,7 +76,46 @@ buttons.forEach((btn) => {
     result.innerHTML = `<b>Thí nghiệm:</b> ${btn.dataset.name}<br><b>PT phản ứng:</b> ${btn.dataset.eq}<br><b>Hiện tượng:</b> ${btn.dataset.ob}`;
   });
 });
+
+const reactions = {
+  'HCl+NaOH': 'Phản ứng trung hòa: HCl + NaOH → NaCl + H₂O',
+  'AgNO3+NaCl': 'Kết tủa trắng: AgNO₃ + NaCl → AgCl↓ + NaNO₃',
+  'CuSO4+Fe': 'Phản ứng thế: CuSO₄ + Fe → FeSO₄ + Cu'
+};
+
+const dropList = document.getElementById('dropList');
+const smartResult = document.getElementById('smartResult');
+const beaker = document.getElementById('beaker');
+const chosen = [];
+
+document.querySelectorAll('.chem').forEach((el) => {
+  el.addEventListener('dragstart', (e) => e.dataTransfer.setData('text/plain', el.dataset.chem));
+});
+
+beaker.addEventListener('dragover', (e) => e.preventDefault());
+beaker.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const chem = e.dataTransfer.getData('text/plain');
+  if (!chem || chosen.includes(chem)) return;
+  chosen.push(chem);
+  const tag = document.createElement('span');
+  tag.className = 'pill';
+  tag.textContent = chem;
+  dropList.appendChild(tag);
+
+  if (chosen.length >= 2) {
+    const pairs = [`${chosen[0]}+${chosen[1]}`, `${chosen[1]}+${chosen[0]}`];
+    const hit = pairs.find((k) => reactions[k]);
+    smartResult.textContent = hit ? `✅ ${reactions[hit]}` : '⚠️ Chưa có mô phỏng cho tổ hợp này.';
+  }
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  chosen.length = 0;
+  dropList.innerHTML = '';
+  smartResult.textContent = 'Kết quả SmartLab sẽ hiển thị tại đây.';
+});
 </script>
-  <script src="offline-register.js"></script>
+<script src="offline-register.js"></script>
 </body>
 </html>
