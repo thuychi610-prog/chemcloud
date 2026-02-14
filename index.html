@@ -8,6 +8,14 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" type="image/png" href="chemistry-6.png">
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -178,6 +186,18 @@
       .top-nav {
         grid-template-columns: 1fr;
         align-items: start;
+      }
+
+
+      /* Giữ header/footer luôn tràn full chiều ngang trên điện thoại */
+      header,
+      footer {
+        width: 100vw;
+        max-width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
       }
 
       .nav-menu {
