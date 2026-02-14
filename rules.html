@@ -51,6 +51,8 @@
       padding: 10px 16px;
       font-weight: 700;
       display: inline-block;
+      border: none;
+      cursor: pointer;
     }
 
     .hero {
@@ -77,6 +79,23 @@
       max-width: 760px;
       line-height: 1.6;
       font-size: 18px;
+    }
+
+    .quick-nav {
+      margin-top: 14px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .quick-nav a {
+      text-decoration: none;
+      background: rgba(255,255,255,.2);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
     }
 
     main {
@@ -118,9 +137,7 @@
       line-height: 1.5;
     }
 
-    .rule-list b {
-      color: #0f766e;
-    }
+    .rule-list b { color: #0f766e; }
 
     table {
       width: 100%;
@@ -142,15 +159,14 @@
       color: #1e40af;
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
+    .full { grid-column: 1 / -1; }
 
     .ack {
       display: flex;
       align-items: center;
       gap: 10px;
       margin-top: 12px;
+      flex-wrap: wrap;
     }
 
     .status {
@@ -159,6 +175,35 @@
       color: #0f766e;
       min-height: 22px;
     }
+
+    .faq-item {
+      border: 1px solid #dbeafe;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: #f8fbff;
+      padding: 12px;
+      font-weight: 700;
+      color: #1e3a8a;
+      cursor: pointer;
+    }
+
+    .faq-a {
+      padding: 12px;
+      border-top: 1px solid #e2e8f0;
+      display: none;
+      line-height: 1.5;
+      color: #334155;
+      background: #ffffff;
+    }
+
+    .faq-item.open .faq-a { display: block; }
 
     footer {
       text-align: center;
@@ -191,11 +236,17 @@
         Bộ quy tắc này giúp học sinh sử dụng ChemCloud đúng mục đích, an toàn và hiệu quả.
         Vui lòng đọc kỹ trước khi tham gia học liệu, chatbot AI và các hoạt động trên hệ thống.
       </p>
+      <div class="quick-nav">
+        <a href="#quytac">Quy tắc</a>
+        <a href="#vipham">Mức xử lý</a>
+        <a href="#quyen">Quyền & trách nhiệm</a>
+        <a href="#faq">FAQ</a>
+      </div>
     </div>
   </section>
 
   <main>
-    <section class="panel">
+    <section id="quytac" class="panel">
       <h3>1) Quy tắc chung</h3>
       <ul class="rule-list">
         <li><b>Đúng mục đích:</b> Chỉ dùng nền tảng để học tập môn Hóa học THPT.</li>
@@ -215,7 +266,7 @@
       </ul>
     </section>
 
-    <section class="panel full">
+    <section id="vipham" class="panel full">
       <h3>3) Mức xử lý vi phạm</h3>
       <table>
         <thead>
@@ -249,13 +300,47 @@
       </table>
     </section>
 
+    <section id="quyen" class="panel">
+      <h3>4) Quyền & trách nhiệm học sinh</h3>
+      <ul class="rule-list">
+        <li><b>Quyền:</b> Được truy cập học liệu, chatbot, bài tập và phản hồi cho giáo viên.</li>
+        <li><b>Trách nhiệm:</b> Tự giác học tập, bảo mật tài khoản, không chia sẻ mật khẩu.</li>
+        <li><b>Báo lỗi:</b> Khi gặp lỗi kỹ thuật, gửi phản hồi qua hòm thư để được hỗ trợ.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h3>5) Kênh hỗ trợ</h3>
+      <ul class="rule-list">
+        <li><b>Giáo viên bộ môn:</b> Hỗ trợ nội dung học tập và đánh giá bài làm.</li>
+        <li><b>Quản trị hệ thống:</b> Hỗ trợ đăng nhập, lỗi tính năng, phục hồi dữ liệu cơ bản.</li>
+        <li><b>Thời gian phản hồi:</b> Trong giờ hành chính hoặc theo lịch lớp.</li>
+      </ul>
+    </section>
+
+    <section id="faq" class="panel full">
+      <h3>6) Câu hỏi thường gặp</h3>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Nếu AI trả lời sai thì làm gì?</button>
+        <div class="faq-a">Đối chiếu với SGK/tài liệu chính thống và hỏi lại giáo viên để xác nhận.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Tôi quên mật khẩu thì xử lý sao?</button>
+        <div class="faq-a">Liên hệ giáo viên hoặc quản trị để được cấp lại tài khoản/đặt lại mật khẩu.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Có dùng được khi mất mạng không?</button>
+        <div class="faq-a">Trang đã có chế độ offline cho nội dung đã cache trước đó, nhưng các tính năng online sẽ tạm gián đoạn.</div>
+      </div>
+    </section>
+
     <section class="panel full">
-      <h3>4) Xác nhận đã đọc nội quy</h3>
+      <h3>7) Xác nhận đã đọc nội quy</h3>
       <div class="ack">
         <input id="agree" type="checkbox" />
         <label for="agree">Tôi đã đọc, hiểu và cam kết tuân thủ nội quy sử dụng ChemCloud.</label>
       </div>
-      <button id="confirmBtn" class="btn" style="margin-top:12px; border:none; cursor:pointer;">Xác nhận</button>
+      <button id="confirmBtn" class="btn" style="margin-top:12px;">Xác nhận</button>
       <div id="confirmStatus" class="status"></div>
     </section>
   </main>
@@ -276,6 +361,13 @@
       localStorage.setItem('chemcloud_rules_ack', JSON.stringify({ accepted: true, at: Date.now() }));
       confirmStatus.style.color = '#0f766e';
       confirmStatus.textContent = '✅ Đã xác nhận nội quy thành công.';
+    });
+
+    document.querySelectorAll('.faq-q').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        item.classList.toggle('open');
+      });
     });
   </script>
 
