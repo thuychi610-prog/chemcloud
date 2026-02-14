@@ -88,12 +88,19 @@
       border-radius: 14px;
       box-shadow: 0 16px 28px rgba(0,0,0,0.12);
       padding: 14px;
-      display: none;
       z-index: 50;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
     }
 
     .menu-item.open .submenu {
-      display: block;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
     }
 
     .submenu h4 {
@@ -155,12 +162,6 @@
 
       .nav-menu {
         justify-content: flex-start;
-      }
-
-      .submenu {
-        position: static;
-        min-width: auto;
-        margin-top: 6px;
       }
 
       .nav-right {
