@@ -8,18 +8,34 @@
 body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#d5f0ff;color:#0f172a}
 header{background:#fff;padding:16px 32px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
 h1{margin:0;color:#2563eb}
-.container{padding:24px;max-width:1000px;margin:auto}
+header p{margin:6px 0 0;color:#334155}
+.container{padding:24px;max-width:1100px;margin:auto}
 .card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.1);margin-bottom:20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .exp-btn{border:1px solid #bfdbfe;background:#eff6ff;border-radius:12px;padding:12px;cursor:pointer;text-align:left;font-weight:600;color:#1e40af}
 .exp-btn.active{background:#2563eb;color:#fff;border-color:#2563eb}
-.result{background:#f8fafc;border-radius:12px;padding:14px;border:1px dashed #cbd5e1;margin-top:12px}
+.result{background:#f8fafc;border-radius:12px;padding:14px;border:1px dashed #cbd5e1;margin-top:12px;line-height:1.45}
 .btn{display:inline-block;padding:10px 18px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:600;border:none;cursor:pointer}
 .btn:hover{background:#1e40af}
-.lab-frame{width:100%;max-width:1000px;aspect-ratio:4/3;height:auto;min-height:600px;border:none;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
-@media(max-width:640px){header{padding:14px 16px}.container{padding:16px}.grid{grid-template-columns:1fr}.lab-frame{min-height:220px}}
-</style>
 
+.lab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.module-card{display:flex;flex-direction:column;gap:12px;background:#f8fbff;border:1px solid #bfdbfe;border-radius:16px;padding:16px;box-shadow:0 6px 16px rgba(37,99,235,.08)}
+.module-card h3{margin:0;color:#133b92;font-size:28px}
+.module-card p{margin:0;color:#0f172a;line-height:1.5}
+.lab-frame{width:100%;aspect-ratio:4/3;height:auto;min-height:240px;border:none;border-radius:12px;background:#e2e8f0}
+.lab-actions{display:flex;gap:10px;flex-wrap:wrap}
+.lab-btn{display:inline-block;padding:10px 16px;background:#2563eb;color:#f7e712;border-radius:999px;text-decoration:none;font-weight:700}
+.lab-btn:hover{background:#1e40af}
+
+@media(max-width:640px){
+  header{padding:14px 16px}
+  .container{padding:16px}
+  .grid{grid-template-columns:1fr}
+  .lab-grid{grid-template-columns:1fr}
+  .module-card h3{font-size:22px}
+  .lab-frame{min-height:210px}
+}
+</style>
 </head>
 <body>
 <header>
@@ -28,54 +44,51 @@ h1{margin:0;color:#2563eb}
 </header>
 
 <div class="container">
-  <div class="card">␊
-    <h2>Chọn thí nghiệm mô phỏng</h2>␊
+  <div class="card">
+    <h2>Chọn thí nghiệm mô phỏng</h2>
     <div class="grid" id="exp-list">
       <button class="exp-btn" data-name="Phản ứng trao đổi ion" data-eq="AgNO₃ + NaCl → AgCl↓ + NaNO₃" data-ob="Xuất hiện kết tủa trắng AgCl.">⚗️ Phản ứng trao đổi ion</button>
-      <button class="exp-btn" data-name="Mô hình nguyên tử" data-eq=""data-ob=""></button>
-      <button class="exp-btn" data-name="Bảng tuần hoàn thông minh" data-eq=""data-ob=""></button>
-      <button class="exp-btn" data-name="Liên kết hóa học" data-eq=""data-ob=""></button>
+      <button class="exp-btn" data-name="Mô hình nguyên tử" data-eq="" data-ob=""></button>
+      <button class="exp-btn" data-name="Bảng tuần hoàn thông minh" data-eq="" data-ob=""></button>
+      <button class="exp-btn" data-name="Liên kết hóa học" data-eq="" data-ob=""></button>
       <button class="exp-btn" data-name="Phản ứng oxi hóa - khử" data-eq="Zn + 2HCl → ZnCl₂ + H₂↑" data-ob="Xuất hiện bọt khí H₂, kẽm tan dần.">🔥 Oxi hóa – khử</button>
-      <button class="exp-btn" data-name="Năng lượng hóa học" data-eq=""data-ob=""></button>
-      <button class="exp-btn" data-name="Tốc độ phản ứng" data-eq=""data-ob=""></button>
-      <button class="exp-btn" data-name="Đơn chất halogen" data-eq=""data-ob=""></button>
-      <button class="exp-btn" data-name="Hợp chất hydrogen halide - hydrohalic acid" data-eq=""data-ob=""></button>
-      <button class="exp-btn" data-name="Nhận biết muối halide" data-eq=""data-ob=""></button>
-      <button class="exp-btn" data-name="Đo pH trong các môi trường" data-eq=""data-ob=""></button>
+      <button class="exp-btn" data-name="Năng lượng hóa học" data-eq="" data-ob=""></button>
+      <button class="exp-btn" data-name="Tốc độ phản ứng" data-eq="" data-ob=""></button>
+      <button class="exp-btn" data-name="Đơn chất halogen" data-eq="" data-ob=""></button>
+      <button class="exp-btn" data-name="Hợp chất hydrogen halide - hydrohalic acid" data-eq="" data-ob=""></button>
+      <button class="exp-btn" data-name="Nhận biết muối halide" data-eq="" data-ob=""></button>
+      <button class="exp-btn" data-name="Đo pH trong các môi trường" data-eq="" data-ob=""></button>
       <button class="exp-btn" data-name="Chuẩn độ acid - base" data-eq="HCl + NaOH → NaCl + H₂O" data-ob="Dung dịch đổi màu ở điểm tương đương.">🧫 Chuẩn độ acid – base</button>
-      <button class="exp-btn" data-name="Điện phân" data-eq=""data-ob=""></button>
-      <button class="exp-btn" data-name="Điện phân" data-eq=""data-ob=""></button>
-      <button class="exp-btn" data-name="Ăn mòn kim loại" data-eq=""data-ob=""></button>
+      <button class="exp-btn" data-name="Điện phân" data-eq="" data-ob=""></button>
+      <button class="exp-btn" data-name="Điện phân" data-eq="" data-ob=""></button>
+      <button class="exp-btn" data-name="Ăn mòn kim loại" data-eq="" data-ob=""></button>
     </div>
     <div class="result" id="result">Hãy chọn một thí nghiệm để xem phương trình và hiện tượng.</div>
   </div>
 
-  <div class="card">
-    <h2>Thí nghiệm Đồng vị và nguyên tử khối</h2>
-    <p>Khám phá các đồng vị và cách tính nguyên tử khối trung bình ngay trong mô phỏng PhET.</p>
-    <iframe
-      class="lab-frame"
-      src="https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_vi.html"
-      width="1000"
-      height="800"
-      allowfullscreen>
-    </iframe>
+  <div class="lab-grid">
+    <div class="module-card">
+      <h3>Thí nghiệm Đồng vị và nguyên tử khối</h3>
+      <iframe class="lab-frame" src="https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_vi.html" allowfullscreen title="PhET Đồng vị và nguyên tử khối"></iframe>
+      <p>Khám phá các đồng vị và cách tính nguyên tử khối trung bình ngay trong mô phỏng PhET.</p>
+      <div class="lab-actions">
+        <a href="https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_vi.html" target="_blank" rel="noopener" class="lab-btn">Vào thực hành</a>
+      </div>
+    </div>
+
+    <div class="module-card">
+      <h3>Thí nghiệm Năng lượng: các dạng và sự chuyển hoá</h3>
+      <iframe class="lab-frame" src="https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_vi.html" allowfullscreen title="PhET Năng lượng"></iframe>
+      <p>Khám phá sự bảo toàn, chuyển hoá và truyền năng lượng trong mô phỏng PhET.</p>
+      <div class="lab-actions">
+        <a href="https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_vi.html" target="_blank" rel="noopener" class="lab-btn">Vào thực hành</a>
+      </div>
+    </div>
   </div>
 
-   <div class="card">
-    <h2>Năng lượng: các dạng và sự chuyển hoá</h2>
-    <p>Khám phá sự bảo toàn, chuyển hóa, truyền năng lượng trong mô phỏng PhET.</p>
-    <iframe
-      class="lab-frame"
-      src="https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_vi.html"
-      width="1000"
-      height="800"
-      allowfullscreen>
-    </iframe>
+  <div style="margin-top:20px">
+    <a href="index.html" class="btn">⬅ Quay về trang chính</a>
   </div>
-
-  
-  <a href="index.html" class="btn">⬅ Quay về trang chính</a>
 </div>
 
 <script>
