@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phân tử ball-stick 3D</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <style>
+    body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#e0f2fe;color:#0f172a}
+    header{padding:14px 24px;background:#fff;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .btn{background:#1d4ed8;color:#fff;text-decoration:none;padding:8px 14px;border-radius:999px;font-weight:700}
+    main{max-width:1000px;margin:18px auto;padding:0 16px;display:grid;grid-template-columns:280px 1fr;gap:16px}
+    .panel{background:#fff;border:1px solid #bfdbfe;border-radius:16px;padding:16px}
+    .viewer{height:360px;background:#0f172a;border-radius:16px;display:flex;align-items:center;justify-content:center;perspective:900px;overflow:hidden}
+    .molecule{position:relative;width:220px;height:220px;transform-style:preserve-3d;transition:transform .2s linear}
+    .atom{position:absolute;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;box-shadow:0 4px 10px rgba(0,0,0,.35)}
+    .o{background:#ef4444}.h{background:#60a5fa}.c{background:#374151}
+    .bond{position:absolute;height:6px;background:#94a3b8;border-radius:999px;transform-origin:left center}
+    @media(max-width:860px){main{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header><h1>🧬 Phân tử ball-stick 3D</h1><a class="btn" href="index.html">⬅ Trang chủ</a></header>
+  <main>
+    <section class="panel">
+      <label>Chọn phân tử</label>
+      <select id="molSel" style="width:100%;padding:10px;border-radius:10px;margin:8px 0 12px">
+        <option value="water">H₂O</option>
+        <option value="co2">CO₂</option>
+        <option value="ch4">CH₄</option>
+      </select>
+      <label>Góc quay Y: <span id="degOut">25</span>°</label>
+      <input id="rot" type="range" min="0" max="360" value="25" style="width:100%" />
+      <label>Phóng to: <span id="zoomOut">1</span>x</label>
+      <input id="zoom" type="range" min="0.7" max="1.7" step="0.1" value="1" style="width:100%" />
+    </section>
+    <section class="panel viewer"><div id="mol" class="molecule"></div></section>
+  </main>
+
+  <script>
+    const mol = document.getElementById('mol');
+    const models = {
+      water: {
+        atoms:[['O',90,90,0,'o'],['H',40,120,40,'h'],['H',140,120,-40,'h']],
+        bonds:[[106,106,65,125,25],[106,106,150,125,-25]]
+      },
+      co2: {
+        atoms:[['O',20,95,-40,'o'],['C',95,95,0,'c'],['O',170,95,40,'o']],
+        bonds:[[35,110,95,110,0],[129,110,185,110,0]]
+      },
+      ch4: {
+        atoms:[['C',95,95,0,'c'],['H',30,60,-35,'h'],['H',160,65,35,'h'],['H',35,155,35,'h'],['H',165,155,-35,'h']],
+        bonds:[[95,110,45,75,-30],[112,110,170,78,-20],[95,118,53,166,35],[112,118,175,166,20]]
+      }
+    };
+
+    function renderModel(name){
+      const m = models[name];
+      mol.innerHTML = '';
+      m.bonds.forEach(([x1,y1,x2,y2,deg])=>{
+        const b = document.createElement('div');
+        b.className='bond';
+        const len = Math.hypot(x2-x1,y2-y1);
+        b.style.left = x1+'px'; b.style.top = y1+'px'; b.style.width = len+'px';
+        b.style.transform = `rotate(${deg}deg)`;
+        mol.appendChild(b);
+      });
+      m.atoms.forEach(([t,x,y,z,cls])=>{
+        const a = document.createElement('div');
+        a.className='atom '+cls;
+        a.style.left=x+'px'; a.style.top=y+'px';
+        a.style.transform = `translateZ(${z}px)`;
+        a.textContent=t; mol.appendChild(a);
+      });
+    }
+
+    const rot = document.getElementById('rot');
+    const zoom = document.getElementById('zoom');
+    const degOut = document.getElementById('degOut');
+    const zoomOut = document.getElementById('zoomOut');
+
+    function updateView(){
+      degOut.textContent = rot.value;
+      zoomOut.textContent = zoom.value;
+      mol.style.transform = `rotateY(${rot.value}deg) rotateX(14deg) scale(${zoom.value})`;
+    }
+
+    document.getElementById('molSel').addEventListener('change',(e)=>{renderModel(e.target.value); updateView();});
+    rot.addEventListener('input', updateView);
+    zoom.addEventListener('input', updateView);
+    renderModel('water'); updateView();
+  </script>
+  <script src="offline-register.js"></script>
+</body>
+</html>

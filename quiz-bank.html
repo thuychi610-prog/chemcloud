@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz ngân hàng lớn</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <style>
+    body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#eff6ff;color:#0f172a}
+    header{padding:14px 24px;background:#fff;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+    .btn{background:#1d4ed8;color:#fff;text-decoration:none;padding:9px 14px;border-radius:999px;font-weight:700}
+    main{max-width:950px;margin:18px auto;padding:0 16px}
+    .card{background:#fff;border:1px solid #bfdbfe;border-radius:16px;padding:16px;margin-bottom:14px}
+    .q{font-weight:700;margin-bottom:8px}
+    label{display:block;padding:8px;border:1px solid #dbeafe;border-radius:10px;margin-bottom:6px;background:#f8fbff}
+  </style>
+</head>
+<body>
+<header><h1>✅ Quiz ngân hàng lớn</h1><a class="btn" href="index.html">⬅ Trang chủ</a></header>
+<main>
+  <div class="card"><button id="newSet" class="btn" style="border:none;cursor:pointer">Tạo đề ngẫu nhiên (10 câu)</button></div>
+  <form id="quizWrap"></form>
+  <div class="card">
+    <button id="submitBtn" class="btn" type="button" style="border:none;cursor:pointer">Chấm điểm</button>
+    <p id="score"></p>
+  </div>
+</main>
+<script>
+const bank = [
+  {q:'NaOH thuộc loại chất nào?',c:['Axit','Bazơ','Muối','Oxide'],a:1},
+  {q:'Công thức của axit sunfuric?',c:['H2SO4','HCl','HNO3','NaOH'],a:0},
+  {q:'Khí làm đục nước vôi trong?',c:['O2','CO2','N2','H2'],a:1},
+  {q:'Kim loại nào phản ứng mạnh với nước lạnh?',c:['Cu','Ag','Na','Au'],a:2},
+  {q:'Muối ăn là?',c:['Na2CO3','NaCl','KCl','CaCO3'],a:1},
+  {q:'Quỳ tím trong môi trường axit chuyển?',c:['Xanh','Đỏ','Vàng','Tím'],a:1},
+  {q:'Chất khí cháy được?',c:['H2','CO2','N2','O2'],a:0},
+  {q:'pH < 7 là môi trường?',c:['Bazơ','Axit','Trung tính','Muối'],a:1},
+  {q:'Canxi cacbonat có trong?',c:['Đá vôi','Nước cất','Không khí','Xăng'],a:0},
+  {q:'Phản ứng trung hòa tạo ra?',c:['Kim loại','Muối và nước','Axit','Bazơ'],a:1},
+  {q:'Chất oxi hóa mạnh thường gặp?',c:['O2','Cl2','N2','H2'],a:1},
+  {q:'Kim loại dẫn điện tốt?',c:['Fe','Cu','Al2O3','S'],a:1}
+];
+let current = [];
+function shuffle(arr){ return [...arr].sort(()=>Math.random()-0.5); }
+function render(){
+  const wrap = document.getElementById('quizWrap');
+  wrap.innerHTML='';
+  current = shuffle(bank).slice(0,10);
+  current.forEach((item,i)=>{
+    const card = document.createElement('div'); card.className='card';
+    card.innerHTML = `<div class="q">Câu ${i+1}: ${item.q}</div>` + item.c.map((opt,idx)=>
+      `<label><input type="radio" name="q${i}" value="${idx}"> ${opt}</label>`
+    ).join('');
+    wrap.appendChild(card);
+  });
+}
+render();
+document.getElementById('newSet').addEventListener('click',render);
+document.getElementById('submitBtn').addEventListener('click',()=>{
+  let correct=0;
+  current.forEach((q,i)=>{
+    const checked = document.querySelector(`input[name="q${i}"]:checked`);
+    if (checked && Number(checked.value)===q.a) correct++;
+  });
+  document.getElementById('score').textContent = `Bạn đúng ${correct}/10 câu.`;
+});
+</script>
+<script src="offline-register.js"></script>
+</body>
+</html>

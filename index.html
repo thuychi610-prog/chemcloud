@@ -165,6 +165,10 @@
 
 
     @media (max-width: 1280px) {
+      .feature-strip {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+      }
+
       nav {
         grid-template-columns: repeat(3, minmax(240px, 1fr));
       }
@@ -190,6 +194,11 @@
     }
 
     @media (max-width: 640px) {
+      .feature-strip {
+        grid-template-columns: 1fr;
+        padding: 0 20px 8px;
+      }
+
       nav {
         grid-template-columns: 1fr;
         padding: 20px;
@@ -211,6 +220,35 @@
       max-width: 700px;
       margin: 12px auto;
       color: #333;
+    }
+
+
+
+    .feature-strip {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0 32px 8px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .feature-link {
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #0f172a;
+      padding: 12px;
+      font-weight: 700;
+      box-shadow: 0 6px 14px rgba(0,0,0,.06);
+      transition: transform .2s ease, box-shadow .2s ease;
+      display: block;
+    }
+
+    .feature-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 18px rgba(37,99,235,.18);
     }
 
     nav {
@@ -456,6 +494,12 @@
     ChemCloud tích hợp học liệu số, AI, mô phỏng thí nghiệm và STEAM nhằm phát triển 
     năng lực tự học, tư duy phản biện và sáng tạo cho học sinh THPT theo CTGDPT 2018.
   </p>
+</section>
+<section class="feature-strip" aria-label="Tính năng nâng cao">
+  <a class="feature-link" href="smartlab.html">✅ SmartLab thật sự (kéo-thả hóa chất)</a>
+  <a class="feature-link" href="quiz-bank.html">✅ Quiz ngân hàng lớn</a>
+  <a class="feature-link" href="molecule3d.html">✅ Phân tử ball-stick 3D</a>
+  <a class="feature-link" href="teacher-dashboard.html">✅ Dashboard giáo viên</a>
 </section>
 
 <nav>

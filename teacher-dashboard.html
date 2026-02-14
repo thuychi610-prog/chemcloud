@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard giáo viên</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <style>
+    body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#f0f9ff;color:#0f172a}
+    header{padding:14px 24px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;justify-content:space-between;align-items:center}
+    .btn{background:#1d4ed8;color:#fff;text-decoration:none;padding:9px 14px;border-radius:999px;font-weight:700}
+    main{max-width:1150px;margin:18px auto;padding:0 16px}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));gap:12px}
+    .kpi,.card{background:#fff;border:1px solid #bfdbfe;border-radius:14px;padding:14px}
+    .kpi b{font-size:28px;color:#1d4ed8}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid #e2e8f0;text-align:left}
+    th{background:#eff6ff}
+    .ok{color:#059669;font-weight:700}.warn{color:#d97706;font-weight:700}
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header><h1>📊 Dashboard giáo viên</h1><a class="btn" href="index.html">⬅ Trang chủ</a></header>
+  <main>
+    <section class="grid">
+      <div class="kpi"><div>Lớp đang quản lý</div><b>3</b></div>
+      <div class="kpi"><div>Tổng học sinh</div><b>128</b></div>
+      <div class="kpi"><div>Hoàn thành bài tập</div><b>84%</b></div>
+      <div class="kpi"><div>Cần hỗ trợ</div><b style="color:#d97706">17</b></div>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h3>Tiến độ theo lớp</h3>
+      <canvas id="bar" width="1000" height="220" style="width:100%;border:1px solid #e2e8f0;border-radius:10px"></canvas>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h3>Bảng theo dõi học sinh</h3>
+      <table>
+        <thead><tr><th>Họ tên</th><th>Lớp</th><th>Điểm TB</th><th>Trạng thái</th></tr></thead>
+        <tbody>
+          <tr><td>Nguyễn Minh Khoa</td><td>12A1</td><td>8.6</td><td class="ok">Tốt</td></tr>
+          <tr><td>Trần Khánh Ly</td><td>12A1</td><td>7.4</td><td class="ok">Ổn định</td></tr>
+          <tr><td>Lê Đức Anh</td><td>12A2</td><td>6.2</td><td class="warn">Cần hỗ trợ</td></tr>
+          <tr><td>Phạm Bảo Ngọc</td><td>12A3</td><td>8.1</td><td class="ok">Tốt</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    const data = [
+      {label:'12A1', value:88},
+      {label:'12A2', value:76},
+      {label:'12A3', value:82}
+    ];
+    const c = document.getElementById('bar');
+    const ctx = c.getContext('2d');
+    const w = c.width, h = c.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.font = '14px Segoe UI';
+    const max = 100, baseY = h - 35;
+    data.forEach((d,i)=>{
+      const bw = 150, gap = 90, x = 120 + i*(bw+gap);
+      const bh = (d.value/max)*150;
+      ctx.fillStyle = '#bfdbfe'; ctx.fillRect(x, baseY-150, bw, 150);
+      ctx.fillStyle = '#2563eb'; ctx.fillRect(x, baseY-bh, bw, bh);
+      ctx.fillStyle = '#0f172a'; ctx.fillText(d.label, x+bw/2-18, baseY+18);
+      ctx.fillText(d.value+'%', x+bw/2-16, baseY-bh-8);
+    });
+  </script>
+  <script src="offline-register.js"></script>
+</body>
+</html>

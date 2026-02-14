@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>SmartLab thật sự</title>
+  <style>
+    body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(to bottom,#e0f2fe,#f8fbff);color:#0f172a}
+    header{padding:14px 24px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    .btn{background:#1d4ed8;color:#fff;text-decoration:none;padding:9px 14px;border-radius:999px;font-weight:700}
+    main{max-width:1100px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:320px 1fr;gap:16px}
+    .panel{background:#fff;border:1px solid #bfdbfe;border-radius:16px;padding:16px;box-shadow:0 10px 20px rgba(0,0,0,.06)}
+    .chem{padding:10px;border:1px solid #dbeafe;border-radius:10px;background:#f8fbff;margin-bottom:8px;cursor:grab;font-weight:600}
+    .dropzone{min-height:260px;border:2px dashed #60a5fa;border-radius:14px;background:#eff6ff;padding:12px}
+    .drop-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .pill{background:#1d4ed8;color:#fff;padding:5px 10px;border-radius:999px;font-size:13px}
+    .result{margin-top:12px;padding:12px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;min-height:44px}
+    @media(max-width:850px){main{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧪 SmartLab thật sự (kéo-thả hóa chất)</h1>
+    <a class="btn" href="index.html">⬅ Trang chủ</a>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h3>Hóa chất</h3>
+      <p>Kéo thả vào cốc thí nghiệm.</p>
+      <div class="chem" draggable="true" data-chem="HCl">HCl</div>
+      <div class="chem" draggable="true" data-chem="NaOH">NaOH</div>
+      <div class="chem" draggable="true" data-chem="AgNO3">AgNO₃</div>
+      <div class="chem" draggable="true" data-chem="NaCl">NaCl</div>
+      <div class="chem" draggable="true" data-chem="CuSO4">CuSO₄</div>
+      <div class="chem" draggable="true" data-chem="Fe">Fe</div>
+    </section>
+
+    <section class="panel">
+      <h3>Cốc thí nghiệm</h3>
+      <div id="beaker" class="dropzone">Thả hóa chất vào đây...
+        <div id="dropList" class="drop-list"></div>
+      </div>
+      <div id="result" class="result">Kết quả sẽ hiển thị tại đây.</div>
+      <p style="color:#475569">Mẹo: thử HCl + NaOH hoặc AgNO₃ + NaCl.</p>
+      <button id="resetBtn" class="btn" style="border:none;cursor:pointer">Làm lại</button>
+    </section>
+  </main>
+
+  <script>
+    const reactions = {
+      'HCl+NaOH': 'Phản ứng trung hòa: HCl + NaOH → NaCl + H₂O',
+      'AgNO3+NaCl': 'Kết tủa trắng: AgNO₃ + NaCl → AgCl↓ + NaNO₃',
+      'CuSO4+Fe': 'Phản ứng thế: CuSO₄ + Fe → FeSO₄ + Cu'
+    };
+
+    const dropList = document.getElementById('dropList');
+    const result = document.getElementById('result');
+    const beaker = document.getElementById('beaker');
+    const chosen = [];
+
+    document.querySelectorAll('.chem').forEach((el) => {
+      el.addEventListener('dragstart', (e) => e.dataTransfer.setData('text/plain', el.dataset.chem));
+    });
+
+    beaker.addEventListener('dragover', (e) => e.preventDefault());
+    beaker.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const chem = e.dataTransfer.getData('text/plain');
+      if (!chem || chosen.includes(chem)) return;
+      chosen.push(chem);
+      const tag = document.createElement('span');
+      tag.className = 'pill';
+      tag.textContent = chem;
+      dropList.appendChild(tag);
+
+      if (chosen.length >= 2) {
+        const pairs = [
+          `${chosen[0]}+${chosen[1]}`,
+          `${chosen[1]}+${chosen[0]}`
+        ];
+        const hit = pairs.find((k) => reactions[k]);
+        result.textContent = hit ? `✅ ${reactions[hit]}` : '⚠️ Chưa có mô phỏng cho tổ hợp này.';
+      }
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      chosen.length = 0;
+      dropList.innerHTML = '';
+      result.textContent = 'Kết quả sẽ hiển thị tại đây.';
+    });
+  </script>
+  <script src="offline-register.js"></script>
+</body>
+</html>
